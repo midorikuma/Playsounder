@@ -29,502 +29,483 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.listBox4 = new System.Windows.Forms.ListBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.listBox5 = new System.Windows.Forms.ListBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.Pitch0Button = new System.Windows.Forms.Button();
-            this.PitchBar = new System.Windows.Forms.TrackBar();
-            this.Pitch1Button = new System.Windows.Forms.Button();
-            this.Pitch2Button = new System.Windows.Forms.Button();
-            this.PitchText = new System.Windows.Forms.TextBox();
-            this.StopButton = new System.Windows.Forms.Button();
-            this.VolumeBar = new System.Windows.Forms.TrackBar();
-            this.CommandText = new System.Windows.Forms.TextBox();
-            this.CopyButton = new System.Windows.Forms.Button();
-            this.MuteButton = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.listBox6 = new System.Windows.Forms.ListBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.PlayButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label0 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.PitchBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.VolumeBar)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.SuspendLayout();
+            comboBox1 = new System.Windows.Forms.ComboBox();
+            label1 = new System.Windows.Forms.Label();
+            listBox2 = new System.Windows.Forms.ListBox();
+            label2 = new System.Windows.Forms.Label();
+            listBox3 = new System.Windows.Forms.ListBox();
+            listBox4 = new System.Windows.Forms.ListBox();
+            label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            listBox5 = new System.Windows.Forms.ListBox();
+            label5 = new System.Windows.Forms.Label();
+            Pitch0Button = new System.Windows.Forms.Button();
+            PitchBar = new System.Windows.Forms.TrackBar();
+            Pitch1Button = new System.Windows.Forms.Button();
+            Pitch2Button = new System.Windows.Forms.Button();
+            PitchText = new System.Windows.Forms.TextBox();
+            StopButton = new System.Windows.Forms.Button();
+            VolumeBar = new System.Windows.Forms.TrackBar();
+            CommandText = new System.Windows.Forms.TextBox();
+            CopyButton = new System.Windows.Forms.Button();
+            MuteButton = new System.Windows.Forms.CheckBox();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            listBox1 = new System.Windows.Forms.ListBox();
+            label6 = new System.Windows.Forms.Label();
+            listBox6 = new System.Windows.Forms.ListBox();
+            tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            comboBox2 = new System.Windows.Forms.ComboBox();
+            PlayButton = new System.Windows.Forms.Button();
+            tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            label0 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)PitchBar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)VolumeBar).BeginInit();
+            tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            SuspendLayout();
             // 
             // comboBox1
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Location = new System.Drawing.Point(3, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(84, 20);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.DropDown += new System.EventHandler(this.comboBox1_OnDropDownOpened);
-            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
+            comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboBox1.Location = new System.Drawing.Point(4, 4);
+            comboBox1.Margin = new System.Windows.Forms.Padding(4);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new System.Drawing.Size(97, 23);
+            comboBox1.TabIndex = 0;
+            comboBox1.DropDown += comboBox1_OnDropDownOpened;
+            comboBox1.SelectionChangeCommitted += comboBox1_SelectionChangeCommitted;
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Location = new System.Drawing.Point(3, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 12);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Select Ver.";
+            label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            label1.Location = new System.Drawing.Point(4, 29);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(109, 15);
+            label1.TabIndex = 2;
+            label1.Text = "Select Ver.";
             // 
             // listBox2
             // 
-            this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(103, 38);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(94, 280);
-            this.listBox2.TabIndex = 3;
-            this.listBox2.Visible = false;
-            this.listBox2.VisibleChanged += new System.EventHandler(this.AdjustColumnWidthBasedOnListBoxContent);
-            this.listBox2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBox_SelectedIndexChanged);
+            listBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listBox2.FormattingEnabled = true;
+            listBox2.ItemHeight = 15;
+            listBox2.Location = new System.Drawing.Point(121, 48);
+            listBox2.Margin = new System.Windows.Forms.Padding(4);
+            listBox2.Name = "listBox2";
+            listBox2.Size = new System.Drawing.Size(109, 334);
+            listBox2.TabIndex = 3;
+            listBox2.Visible = false;
+            listBox2.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
+            listBox2.MouseUp += listBox_SelectedIndexChanged;
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.Location = new System.Drawing.Point(103, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 12);
-            this.label2.TabIndex = 4;
+            label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            label2.Location = new System.Drawing.Point(121, 29);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(109, 15);
+            label2.TabIndex = 4;
             // 
             // listBox3
             // 
-            this.listBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 12;
-            this.listBox3.Location = new System.Drawing.Point(203, 38);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(94, 280);
-            this.listBox3.TabIndex = 5;
-            this.listBox3.Visible = false;
-            this.listBox3.VisibleChanged += new System.EventHandler(this.AdjustColumnWidthBasedOnListBoxContent);
-            this.listBox3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBox_SelectedIndexChanged);
+            listBox3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listBox3.FormattingEnabled = true;
+            listBox3.ItemHeight = 15;
+            listBox3.Location = new System.Drawing.Point(238, 48);
+            listBox3.Margin = new System.Windows.Forms.Padding(4);
+            listBox3.Name = "listBox3";
+            listBox3.Size = new System.Drawing.Size(109, 334);
+            listBox3.TabIndex = 5;
+            listBox3.Visible = false;
+            listBox3.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
+            listBox3.MouseUp += listBox_SelectedIndexChanged;
             // 
             // listBox4
             // 
-            this.listBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.ItemHeight = 12;
-            this.listBox4.Location = new System.Drawing.Point(303, 38);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(94, 280);
-            this.listBox4.TabIndex = 6;
-            this.listBox4.Visible = false;
-            this.listBox4.VisibleChanged += new System.EventHandler(this.AdjustColumnWidthBasedOnListBoxContent);
-            this.listBox4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBox_SelectedIndexChanged);
+            listBox4.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listBox4.FormattingEnabled = true;
+            listBox4.ItemHeight = 15;
+            listBox4.Location = new System.Drawing.Point(355, 48);
+            listBox4.Margin = new System.Windows.Forms.Padding(4);
+            listBox4.Name = "listBox4";
+            listBox4.Size = new System.Drawing.Size(109, 334);
+            listBox4.TabIndex = 6;
+            listBox4.Visible = false;
+            listBox4.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
+            listBox4.MouseUp += listBox_SelectedIndexChanged;
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Location = new System.Drawing.Point(203, 23);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 12);
-            this.label3.TabIndex = 7;
+            label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            label3.Location = new System.Drawing.Point(238, 29);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(109, 15);
+            label3.TabIndex = 7;
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.Location = new System.Drawing.Point(303, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 12);
-            this.label4.TabIndex = 8;
+            label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            label4.Location = new System.Drawing.Point(355, 29);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(109, 15);
+            label4.TabIndex = 8;
             // 
             // listBox5
             // 
-            this.listBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox5.FormattingEnabled = true;
-            this.listBox5.ItemHeight = 12;
-            this.listBox5.Location = new System.Drawing.Point(403, 38);
-            this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(94, 280);
-            this.listBox5.TabIndex = 9;
-            this.listBox5.Visible = false;
-            this.listBox5.VisibleChanged += new System.EventHandler(this.AdjustColumnWidthBasedOnListBoxContent);
-            this.listBox5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBox_SelectedIndexChanged);
+            listBox5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listBox5.FormattingEnabled = true;
+            listBox5.ItemHeight = 15;
+            listBox5.Location = new System.Drawing.Point(472, 48);
+            listBox5.Margin = new System.Windows.Forms.Padding(4);
+            listBox5.Name = "listBox5";
+            listBox5.Size = new System.Drawing.Size(109, 334);
+            listBox5.TabIndex = 9;
+            listBox5.Visible = false;
+            listBox5.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
+            listBox5.MouseUp += listBox_SelectedIndexChanged;
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.Location = new System.Drawing.Point(403, 23);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(94, 12);
-            this.label5.TabIndex = 10;
+            label5.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            label5.Location = new System.Drawing.Point(472, 29);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(109, 15);
+            label5.TabIndex = 10;
             // 
             // Pitch0Button
             // 
-            this.Pitch0Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Pitch0Button.Location = new System.Drawing.Point(0, 6);
-            this.Pitch0Button.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.Pitch0Button.Name = "Pitch0Button";
-            this.Pitch0Button.Size = new System.Drawing.Size(27, 18);
-            this.Pitch0Button.TabIndex = 12;
-            this.Pitch0Button.Text = "0.5";
-            this.Pitch0Button.UseVisualStyleBackColor = true;
-            this.Pitch0Button.Click += new System.EventHandler(this.PitchButton_Click);
+            Pitch0Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            Pitch0Button.Location = new System.Drawing.Point(4, 2);
+            Pitch0Button.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            Pitch0Button.Name = "Pitch0Button";
+            Pitch0Button.Size = new System.Drawing.Size(31, 22);
+            Pitch0Button.TabIndex = 12;
+            Pitch0Button.Text = "0.5";
+            Pitch0Button.UseVisualStyleBackColor = true;
+            Pitch0Button.Click += PitchButton_Click;
             // 
             // PitchBar
             // 
-            this.PitchBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PitchBar.Location = new System.Drawing.Point(0, 3);
-            this.PitchBar.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.PitchBar.Maximum = 100;
-            this.PitchBar.Minimum = -100;
-            this.PitchBar.Name = "PitchBar";
-            this.PitchBar.Size = new System.Drawing.Size(180, 26);
-            this.PitchBar.TabIndex = 13;
-            this.PitchBar.TickFrequency = 10;
-            this.PitchBar.Scroll += new System.EventHandler(this.PitchBar_Scroll);
-            this.PitchBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PlayButton_Click);
+            PitchBar.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            PitchBar.Location = new System.Drawing.Point(0, 4);
+            PitchBar.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            PitchBar.Maximum = 100;
+            PitchBar.Minimum = -100;
+            PitchBar.Name = "PitchBar";
+            PitchBar.Size = new System.Drawing.Size(210, 30);
+            PitchBar.TabIndex = 13;
+            PitchBar.TickFrequency = 10;
+            PitchBar.Scroll += PitchBar_Scroll;
+            PitchBar.MouseUp += PlayButton_Click;
             // 
             // Pitch1Button
             // 
-            this.Pitch1Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.Pitch1Button.Location = new System.Drawing.Point(76, 6);
-            this.Pitch1Button.Name = "Pitch1Button";
-            this.Pitch1Button.Size = new System.Drawing.Size(27, 18);
-            this.Pitch1Button.TabIndex = 14;
-            this.Pitch1Button.Text = "1.0";
-            this.Pitch1Button.UseVisualStyleBackColor = true;
-            this.Pitch1Button.Click += new System.EventHandler(this.PitchButton_Click);
+            Pitch1Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            Pitch1Button.Location = new System.Drawing.Point(89, 2);
+            Pitch1Button.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            Pitch1Button.Name = "Pitch1Button";
+            Pitch1Button.Size = new System.Drawing.Size(31, 22);
+            Pitch1Button.TabIndex = 14;
+            Pitch1Button.Text = "1.0";
+            Pitch1Button.UseVisualStyleBackColor = true;
+            Pitch1Button.Click += PitchButton_Click;
             // 
             // Pitch2Button
             // 
-            this.Pitch2Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pitch2Button.Location = new System.Drawing.Point(153, 6);
-            this.Pitch2Button.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.Pitch2Button.Name = "Pitch2Button";
-            this.Pitch2Button.Size = new System.Drawing.Size(27, 18);
-            this.Pitch2Button.TabIndex = 15;
-            this.Pitch2Button.Text = "2.0";
-            this.Pitch2Button.UseVisualStyleBackColor = true;
-            this.Pitch2Button.Click += new System.EventHandler(this.PitchButton_Click);
+            Pitch2Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            Pitch2Button.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            Pitch2Button.Location = new System.Drawing.Point(175, 2);
+            Pitch2Button.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            Pitch2Button.Name = "Pitch2Button";
+            Pitch2Button.Size = new System.Drawing.Size(31, 22);
+            Pitch2Button.TabIndex = 15;
+            Pitch2Button.Text = "2.0";
+            Pitch2Button.UseVisualStyleBackColor = true;
+            Pitch2Button.Click += PitchButton_Click;
             // 
             // PitchText
             // 
-            this.PitchText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PitchText.Location = new System.Drawing.Point(183, 3);
-            this.PitchText.Name = "PitchText";
-            this.PitchText.Size = new System.Drawing.Size(43, 19);
-            this.PitchText.TabIndex = 16;
-            this.PitchText.Text = "1.0";
-            this.PitchText.TextChanged += new System.EventHandler(this.PitchText_TextChanged);
+            PitchText.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            PitchText.Location = new System.Drawing.Point(214, 4);
+            PitchText.Margin = new System.Windows.Forms.Padding(4);
+            PitchText.Name = "PitchText";
+            PitchText.Size = new System.Drawing.Size(50, 23);
+            PitchText.TabIndex = 16;
+            PitchText.Text = "1.0";
+            PitchText.TextChanged += PitchText_TextChanged;
             // 
             // StopButton
             // 
-            this.StopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.StopButton.Font = new System.Drawing.Font("MS UI Gothic", 8F);
-            this.StopButton.Location = new System.Drawing.Point(206, 3);
-            this.StopButton.Margin = new System.Windows.Forms.Padding(1, 3, 1, 1);
-            this.StopButton.Name = "StopButton";
-            this.StopButton.Size = new System.Drawing.Size(23, 23);
-            this.StopButton.TabIndex = 18;
-            this.StopButton.Text = "■";
-            this.StopButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.StopButton.UseVisualStyleBackColor = true;
-            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
+            StopButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            StopButton.Font = new System.Drawing.Font("MS UI Gothic", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            StopButton.Location = new System.Drawing.Point(240, 1);
+            StopButton.Margin = new System.Windows.Forms.Padding(1);
+            StopButton.Name = "StopButton";
+            StopButton.Size = new System.Drawing.Size(27, 24);
+            StopButton.TabIndex = 18;
+            StopButton.Text = "■";
+            StopButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            StopButton.UseVisualStyleBackColor = true;
+            StopButton.Click += StopButton_Click;
             // 
             // VolumeBar
             // 
-            this.VolumeBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.VolumeBar.Location = new System.Drawing.Point(255, 4);
-            this.VolumeBar.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.VolumeBar.Maximum = 100;
-            this.VolumeBar.Minimum = -100;
-            this.VolumeBar.Name = "VolumeBar";
-            this.VolumeBar.Size = new System.Drawing.Size(61, 23);
-            this.VolumeBar.TabIndex = 19;
-            this.VolumeBar.TickFrequency = 0;
-            this.VolumeBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.VolumeBar.Scroll += new System.EventHandler(this.VolumeBar_Scroll);
+            VolumeBar.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            VolumeBar.Location = new System.Drawing.Point(297, 5);
+            VolumeBar.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            VolumeBar.Maximum = 100;
+            VolumeBar.Minimum = -100;
+            VolumeBar.Name = "VolumeBar";
+            VolumeBar.Size = new System.Drawing.Size(72, 21);
+            VolumeBar.TabIndex = 19;
+            VolumeBar.TickFrequency = 0;
+            VolumeBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            VolumeBar.Scroll += VolumeBar_Scroll;
             // 
             // CommandText
             // 
-            this.CommandText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CommandText.Location = new System.Drawing.Point(314, 3);
-            this.CommandText.Name = "CommandText";
-            this.CommandText.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.CommandText.Size = new System.Drawing.Size(320, 19);
-            this.CommandText.TabIndex = 20;
+            CommandText.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            CommandText.Location = new System.Drawing.Point(368, 4);
+            CommandText.Margin = new System.Windows.Forms.Padding(4);
+            CommandText.Name = "CommandText";
+            CommandText.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            CommandText.Size = new System.Drawing.Size(371, 23);
+            CommandText.TabIndex = 20;
             // 
             // CopyButton
             // 
-            this.CopyButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CopyButton.Location = new System.Drawing.Point(591, 3);
-            this.CopyButton.Name = "CopyButton";
-            this.CopyButton.Size = new System.Drawing.Size(43, 21);
-            this.CopyButton.TabIndex = 21;
-            this.CopyButton.Text = "Copy";
-            this.CopyButton.UseVisualStyleBackColor = true;
-            this.CopyButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CopyButton_Click);
+            CopyButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            CopyButton.Location = new System.Drawing.Point(694, 2);
+            CopyButton.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            CopyButton.Name = "CopyButton";
+            CopyButton.Size = new System.Drawing.Size(45, 22);
+            CopyButton.TabIndex = 21;
+            CopyButton.Text = "Copy";
+            CopyButton.UseVisualStyleBackColor = true;
+            CopyButton.MouseUp += CopyButton_Click;
             // 
             // MuteButton
             // 
-            this.MuteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.MuteButton.Appearance = System.Windows.Forms.Appearance.Button;
-            this.MuteButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.MuteButton.Location = new System.Drawing.Point(231, 3);
-            this.MuteButton.Margin = new System.Windows.Forms.Padding(1, 3, 1, 1);
-            this.MuteButton.Name = "MuteButton";
-            this.MuteButton.Size = new System.Drawing.Size(23, 23);
-            this.MuteButton.TabIndex = 22;
-            this.MuteButton.Text = "🔊";
-            this.MuteButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.MuteButton.UseVisualStyleBackColor = true;
-            this.MuteButton.CheckedChanged += new System.EventHandler(this.CheckStateChanged);
+            MuteButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            MuteButton.Appearance = System.Windows.Forms.Appearance.Button;
+            MuteButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            MuteButton.Location = new System.Drawing.Point(269, 1);
+            MuteButton.Margin = new System.Windows.Forms.Padding(1);
+            MuteButton.Name = "MuteButton";
+            MuteButton.Size = new System.Drawing.Size(27, 24);
+            MuteButton.TabIndex = 22;
+            MuteButton.Text = "🔊";
+            MuteButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            MuteButton.UseVisualStyleBackColor = true;
+            MuteButton.CheckedChanged += CheckStateChanged;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 7;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.listBox3, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listBox4, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listBox5, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listBox2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listBox1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.listBox6, 6, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(637, 321);
-            this.tableLayoutPanel1.TabIndex = 23;
+            tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tableLayoutPanel1.ColumnCount = 7;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            tableLayoutPanel1.Controls.Add(listBox3, 2, 1);
+            tableLayoutPanel1.Controls.Add(listBox4, 3, 1);
+            tableLayoutPanel1.Controls.Add(listBox5, 4, 1);
+            tableLayoutPanel1.Controls.Add(listBox2, 1, 1);
+            tableLayoutPanel1.Controls.Add(listBox1, 0, 1);
+            tableLayoutPanel1.Controls.Add(label1, 0, 0);
+            tableLayoutPanel1.Controls.Add(label2, 1, 0);
+            tableLayoutPanel1.Controls.Add(label4, 3, 0);
+            tableLayoutPanel1.Controls.Add(label5, 4, 0);
+            tableLayoutPanel1.Controls.Add(label3, 2, 0);
+            tableLayoutPanel1.Controls.Add(label6, 6, 0);
+            tableLayoutPanel1.Controls.Add(listBox6, 6, 1);
+            tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(743, 388);
+            tableLayoutPanel1.TabIndex = 23;
             // 
             // listBox1
             // 
-            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(3, 38);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(94, 280);
-            this.listBox1.TabIndex = 2;
-            this.listBox1.Visible = false;
-            this.listBox1.VisibleChanged += new System.EventHandler(this.AdjustColumnWidthBasedOnListBoxContent);
-            this.listBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBox_SelectedIndexChanged);
+            listBox1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new System.Drawing.Point(4, 48);
+            listBox1.Margin = new System.Windows.Forms.Padding(4);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new System.Drawing.Size(109, 334);
+            listBox1.TabIndex = 2;
+            listBox1.Visible = false;
+            listBox1.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
+            listBox1.MouseUp += listBox_SelectedIndexChanged;
             // 
             // label6
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.Location = new System.Drawing.Point(540, 12);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 23);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "ogg files";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label6.Visible = false;
+            label6.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            label6.Location = new System.Drawing.Point(630, 15);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(109, 29);
+            label6.TabIndex = 12;
+            label6.Text = "ogg files";
+            label6.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            label6.Visible = false;
             // 
             // listBox6
             // 
-            this.listBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox6.FormattingEnabled = true;
-            this.listBox6.ItemHeight = 12;
-            this.listBox6.Location = new System.Drawing.Point(540, 38);
-            this.listBox6.Name = "listBox6";
-            this.listBox6.Size = new System.Drawing.Size(94, 280);
-            this.listBox6.TabIndex = 11;
-            this.listBox6.Visible = false;
-            this.listBox6.VisibleChanged += new System.EventHandler(this.AdjustColumnWidthBasedOnListBoxContent);
-            this.listBox6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBox_SelectedIndexChanged);
+            listBox6.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listBox6.FormattingEnabled = true;
+            listBox6.ItemHeight = 15;
+            listBox6.Location = new System.Drawing.Point(630, 48);
+            listBox6.Margin = new System.Windows.Forms.Padding(4);
+            listBox6.Name = "listBox6";
+            listBox6.Size = new System.Drawing.Size(109, 334);
+            listBox6.TabIndex = 11;
+            listBox6.Visible = false;
+            listBox6.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
+            listBox6.MouseUp += listBox_SelectedIndexChanged;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel3.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.tableLayoutPanel3.ColumnCount = 4;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.94092F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.16193F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.11597F));
-            this.tableLayoutPanel3.Controls.Add(this.PitchBar, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.PitchText, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.comboBox2, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.CommandText, 3, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 327);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(637, 29);
-            this.tableLayoutPanel3.TabIndex = 12;
+            tableLayoutPanel3.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tableLayoutPanel3.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            tableLayoutPanel3.ColumnCount = 4;
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.94092F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.16193F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.11597F));
+            tableLayoutPanel3.Controls.Add(PitchBar, 0, 0);
+            tableLayoutPanel3.Controls.Add(PitchText, 1, 0);
+            tableLayoutPanel3.Controls.Add(comboBox2, 2, 0);
+            tableLayoutPanel3.Controls.Add(CommandText, 3, 0);
+            tableLayoutPanel3.Location = new System.Drawing.Point(4, 400);
+            tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel3.Size = new System.Drawing.Size(743, 34);
+            tableLayoutPanel3.TabIndex = 12;
             // 
             // comboBox2
             // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Command",
-            "Path"});
-            this.comboBox2.Location = new System.Drawing.Point(232, 3);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(76, 20);
-            this.comboBox2.TabIndex = 21;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            comboBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboBox2.Items.AddRange(new object[] { "Command", "Path" });
+            comboBox2.Location = new System.Drawing.Point(272, 4);
+            comboBox2.Margin = new System.Windows.Forms.Padding(4);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new System.Drawing.Size(88, 23);
+            comboBox2.TabIndex = 21;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // PlayButton
             // 
-            this.PlayButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PlayButton.Cursor = System.Windows.Forms.Cursors.Default;
-            this.PlayButton.Font = new System.Drawing.Font("MS UI Gothic", 13F);
-            this.PlayButton.Location = new System.Drawing.Point(183, 3);
-            this.PlayButton.Margin = new System.Windows.Forms.Padding(3, 3, 1, 1);
-            this.PlayButton.Name = "PlayButton";
-            this.PlayButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.PlayButton.Size = new System.Drawing.Size(21, 23);
-            this.PlayButton.TabIndex = 17;
-            this.PlayButton.Text = "▶";
-            this.PlayButton.UseVisualStyleBackColor = true;
-            this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
+            PlayButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            PlayButton.Font = new System.Drawing.Font("MS UI Gothic", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            PlayButton.Location = new System.Drawing.Point(214, 1);
+            PlayButton.Margin = new System.Windows.Forms.Padding(4, 1, 1, 1);
+            PlayButton.Name = "PlayButton";
+            PlayButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            PlayButton.Size = new System.Drawing.Size(24, 24);
+            PlayButton.TabIndex = 17;
+            PlayButton.Text = "▶";
+            PlayButton.UseVisualStyleBackColor = true;
+            PlayButton.Click += PlayButton_Click;
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel4.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.tableLayoutPanel4.ColumnCount = 8;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 321F));
-            this.tableLayoutPanel4.Controls.Add(this.Pitch0Button, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.Pitch1Button, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.Pitch2Button, 2, 0);
-            this.tableLayoutPanel4.Controls.Add(this.StopButton, 4, 0);
-            this.tableLayoutPanel4.Controls.Add(this.PlayButton, 3, 0);
-            this.tableLayoutPanel4.Controls.Add(this.CopyButton, 7, 0);
-            this.tableLayoutPanel4.Controls.Add(this.VolumeBar, 6, 0);
-            this.tableLayoutPanel4.Controls.Add(this.MuteButton, 5, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 352);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(637, 27);
-            this.tableLayoutPanel4.TabIndex = 25;
+            tableLayoutPanel4.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tableLayoutPanel4.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            tableLayoutPanel4.ColumnCount = 8;
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 374F));
+            tableLayoutPanel4.Controls.Add(Pitch1Button, 1, 0);
+            tableLayoutPanel4.Controls.Add(Pitch2Button, 2, 0);
+            tableLayoutPanel4.Controls.Add(StopButton, 4, 0);
+            tableLayoutPanel4.Controls.Add(PlayButton, 3, 0);
+            tableLayoutPanel4.Controls.Add(CopyButton, 7, 0);
+            tableLayoutPanel4.Controls.Add(VolumeBar, 6, 0);
+            tableLayoutPanel4.Controls.Add(MuteButton, 5, 0);
+            tableLayoutPanel4.Controls.Add(Pitch0Button, 0, 0);
+            tableLayoutPanel4.Location = new System.Drawing.Point(4, 431);
+            tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 1;
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel4.Size = new System.Drawing.Size(743, 26);
+            tableLayoutPanel4.TabIndex = 25;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 728F));
-            this.tableLayoutPanel2.Controls.Add(this.label0, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 323);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(637, 6);
-            this.tableLayoutPanel2.TabIndex = 24;
+            tableLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tableLayoutPanel2.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 849F));
+            tableLayoutPanel2.Controls.Add(label0, 0, 0);
+            tableLayoutPanel2.Location = new System.Drawing.Point(4, 398);
+            tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            tableLayoutPanel2.Size = new System.Drawing.Size(743, 10);
+            tableLayoutPanel2.TabIndex = 24;
             // 
             // label0
             // 
-            this.label0.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label0.Location = new System.Drawing.Point(3, 0);
-            this.label0.Name = "label0";
-            this.label0.Size = new System.Drawing.Size(722, 1);
-            this.label0.TabIndex = 11;
-            this.label0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label0.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            label0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            label0.Location = new System.Drawing.Point(4, 0);
+            label0.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label0.Name = "label0";
+            label0.Size = new System.Drawing.Size(841, 1);
+            label0.TabIndex = 11;
+            label0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 382);
-            this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tableLayoutPanel3);
-            this.Controls.Add(this.tableLayoutPanel4);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
-            this.Text = "Playsounder";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.PitchBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.VolumeBar)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(751, 460);
+            Controls.Add(tableLayoutPanel4);
+            Controls.Add(comboBox1);
+            Controls.Add(tableLayoutPanel3);
+            Controls.Add(tableLayoutPanel2);
+            Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4);
+            Name = "Form1";
+            Text = "Playsounder";
+            Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)PitchBar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)VolumeBar).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel4.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion

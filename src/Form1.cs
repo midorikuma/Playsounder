@@ -1,28 +1,26 @@
-﻿using System;
+﻿using CSCore;
+using CSCore.SoundOut;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NVorbis;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Text;
-
-using CSCore;
-using CSCore.SoundOut;
-using NVorbis;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 
 
 namespace Playsounder
 {
 
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IDisposable
     {
         private JObject soundsJson;
 
-        public class NvorbisToCSCore : IWaveSource
+        public class NvorbisToCSCore : IWaveSource, IDisposable
         {
             public bool CanSeek => true;
 
@@ -59,8 +57,32 @@ namespace Playsounder
                 set => _reader.SamplePosition = value;
             }
             public long Length => _reader.TotalSamples * _waveFormat.Channels;
-            public void Dispose() => _reader.Dispose();
+
+            // IDisposableの実装
+            public void Dispose()
+            {
+                Dispose(true);
+                GC.SuppressFinalize(this);
+            }
+
+            protected virtual void Dispose(bool disposing)
+            {
+                if (disposing)
+                {
+                    // Managed resourcesの解放
+                    _reader?.Dispose();
+                    _reader = null;
+                }
+                // Unmanaged resourcesの解放
+            }
+
+            // ファイナライザ（デストラクタ）
+            ~NvorbisToCSCore()
+            {
+                Dispose(false);
+            }
         }
+
         public struct data
         {
             public string FullPath;
@@ -68,7 +90,7 @@ namespace Playsounder
         }
         public static List<data> Sounds = new List<data>();
         public static List<string> FullPaths = new List<string>();
-        public static string RootPath = 
+        public static string RootPath =
             System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\.minecraft\";
         //複数oggの数字検索用
         public static Random rnd = new System.Random();
@@ -465,6 +487,17 @@ namespace Playsounder
         private IWaveSource _waveSource;
         private string _generatedCommand;
 
+        private void DisposeSoundResources()
+        {
+            _soundOut?.Stop();
+            _soundOut?.Dispose();
+            _soundOut = null;
+
+            _waveSource?.Dispose();
+            _waveSource = null;
+        }
+
+
         private class PlaybackSpeedAdjuster : SampleAggregatorBase
         {
             private readonly ISampleSource _source;
@@ -480,17 +513,6 @@ namespace Playsounder
                 return _source.Read(buffer, offset, count);
             }
         }
-
-        private void DisposeSoundResources()
-        {
-            _soundOut?.Stop();
-            _soundOut?.Dispose();
-            _soundOut = null;
-
-            _waveSource?.Dispose();
-            _waveSource = null;
-        }
-
         private void PlaySound()
         {
             if (!float.TryParse(PitchText.Text, out var n)) return;
@@ -588,7 +610,7 @@ namespace Playsounder
         private void PitchBar_Scroll(object sender, EventArgs e)
         {
             int i = PitchBar.Value;
-            if (i<0)
+            if (i < 0)
             {
                 BarSpeed = 1 - i * 0.5f / PitchBar.Minimum;
             }
@@ -601,7 +623,7 @@ namespace Playsounder
 
         private void VolumeBar_Scroll(object sender, EventArgs e)
         {
-            PlayVolume = 1 + VolumeBar.Value*0.01f;
+            PlayVolume = 1 + VolumeBar.Value * 0.01f;
         }
 
         private void CopyButton_Click(object sender, EventArgs e)
@@ -620,7 +642,7 @@ namespace Playsounder
         {
             if (MuteButton.Checked)
             {
-                _soundOut.Stop();
+                if (_soundOut!=null) _soundOut.Stop();
                 MuteButton.Text = "🔈";
             }
             else

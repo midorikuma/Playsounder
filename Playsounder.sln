@@ -1,24 +1,17 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src\Playsounder", "src\Playsounder.csproj", "{B619F842-C2CC-4340-A6C7-8322D6415572}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playsounder", "src\Playsounder.csproj", "{B619F842-C2CC-4340-A6C7-8322D6415572}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
-		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B619F842-C2CC-4340-A6C7-8322D6415572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B619F842-C2CC-4340-A6C7-8322D6415572}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B619F842-C2CC-4340-A6C7-8322D6415572}.Debug|x64.ActiveCfg = Debug|x64
 		{B619F842-C2CC-4340-A6C7-8322D6415572}.Debug|x64.Build.0 = Debug|x64
-		{B619F842-C2CC-4340-A6C7-8322D6415572}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B619F842-C2CC-4340-A6C7-8322D6415572}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B619F842-C2CC-4340-A6C7-8322D6415572}.Release|x64.ActiveCfg = Release|x64
 		{B619F842-C2CC-4340-A6C7-8322D6415572}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
