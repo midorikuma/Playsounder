@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using NVorbis;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -534,7 +535,7 @@ namespace Playsounder
 
             if (comboBox2.SelectedIndex == 0)
             {
-                _generatedCommand = "/playsound minecraft:" + _selectedFullPath
+                _generatedCommand = "playsound minecraft:" + _selectedFullPath
                     + " master @a ~ ~ ~ 1 " + PlaySpeed + " 0";
                 CommandText.Text = _generatedCommand;
             }
@@ -618,7 +619,7 @@ namespace Playsounder
             {
                 BarSpeed = 1 + i * 1.0f / PitchBar.Maximum;
             }
-            PitchText.Text = BarSpeed.ToString();
+            PitchText.Text = BarSpeed.ToString("F3", CultureInfo.InvariantCulture).TrimEnd('0').TrimEnd('.');
         }
 
         private void VolumeBar_Scroll(object sender, EventArgs e)
@@ -642,7 +643,7 @@ namespace Playsounder
         {
             if (MuteButton.Checked)
             {
-                if (_soundOut!=null) _soundOut.Stop();
+                if (_soundOut != null) _soundOut.Stop();
                 MuteButton.Text = "🔈";
             }
             else
@@ -664,7 +665,7 @@ namespace Playsounder
             }
             else
             {
-                CommandText.Text = "";
+                CommandText.Text = " ";
             }
         }
     }
