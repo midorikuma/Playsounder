@@ -1027,7 +1027,6 @@ namespace Playsounder
 
                 // comPara_vol_barのValueを更新
                 comPara_vol_bar.Value = newValue;
-                PlayVolume = enteredVolume;
             }
             PlayButton_Click(sender, e);
             UpdateCommand();
@@ -1049,7 +1048,6 @@ namespace Playsounder
 
                 // comPara_volmin_barのValueを更新
                 comPara_volmin_bar.Value = newValue;
-                PlayVolume = enteredVolume;
             }
             PlayButton_Click(sender, e);
             UpdateCommand();
