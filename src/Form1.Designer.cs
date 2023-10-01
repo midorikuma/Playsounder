@@ -79,10 +79,13 @@
             comPara_vol_bar = new System.Windows.Forms.TrackBar();
             listBox_coms = new System.Windows.Forms.ListBox();
             comSavePanel = new System.Windows.Forms.TableLayoutPanel();
-            coms_plus = new System.Windows.Forms.Button();
-            coms_minus = new System.Windows.Forms.Button();
-            button2 = new System.Windows.Forms.Button();
+            comsList_save = new System.Windows.Forms.Button();
+            comsList_moveUp = new System.Windows.Forms.Button();
+            comsList_add = new System.Windows.Forms.Button();
+            comsList_remove = new System.Windows.Forms.Button();
+            comsList_moveDown = new System.Windows.Forms.Button();
             comBottomPanel = new System.Windows.Forms.TableLayoutPanel();
+            saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)PitchBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)VolumeBar).BeginInit();
             pathPanel.SuspendLayout();
@@ -103,8 +106,12 @@
             // 
             // openFileDialog1
             // 
+            openFileDialog1.AutoUpgradeEnabled = false;
+            openFileDialog1.DefaultExt = "mcfunction";
             openFileDialog1.Filter = "mcfunction Files (*.mcfunction)|*.mcfunction|All Files (*.*)|*.*";
+            openFileDialog1.ReadOnlyChecked = true;
             openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.SupportMultiDottedExtensions = true;
             openFileDialog1.Title = "Please select a .mcfunction file";
             openFileDialog1.FileOk += openFileDialog1_FileOk;
             // 
@@ -390,6 +397,7 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             button1.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            button1.ForeColor = System.Drawing.SystemColors.Window;
             button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             button1.Location = new System.Drawing.Point(0, 236);
             button1.Margin = new System.Windows.Forms.Padding(0);
@@ -757,6 +765,7 @@
             // listBox_coms
             // 
             listBox_coms.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listBox_coms.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             listBox_coms.FormattingEnabled = true;
             listBox_coms.ItemHeight = 15;
             listBox_coms.Location = new System.Drawing.Point(114, 2);
@@ -765,20 +774,26 @@
             listBox_coms.SelectionMode = System.Windows.Forms.SelectionMode.None;
             listBox_coms.Size = new System.Drawing.Size(600, 154);
             listBox_coms.TabIndex = 0;
+            listBox_coms.DrawItem += listBox_coms_DrawItem;
             listBox_coms.SelectedIndexChanged += listBox_coms_SelectedIndexChanged;
+            listBox_coms.DataSourceChanged += listBox_coms_DataSourceChanged;
             // 
             // comSavePanel
             // 
             comSavePanel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             comSavePanel.ColumnCount = 1;
             comSavePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            comSavePanel.Controls.Add(coms_plus, 0, 2);
-            comSavePanel.Controls.Add(coms_minus, 0, 3);
-            comSavePanel.Controls.Add(button2, 0, 0);
+            comSavePanel.Controls.Add(comsList_save, 0, 0);
+            comSavePanel.Controls.Add(comsList_moveUp, 0, 4);
+            comSavePanel.Controls.Add(comsList_add, 0, 1);
+            comSavePanel.Controls.Add(comsList_remove, 0, 2);
+            comSavePanel.Controls.Add(comsList_moveDown, 0, 5);
             comSavePanel.Location = new System.Drawing.Point(716, 0);
             comSavePanel.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             comSavePanel.Name = "comSavePanel";
-            comSavePanel.RowCount = 4;
+            comSavePanel.RowCount = 6;
+            comSavePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            comSavePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             comSavePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             comSavePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             comSavePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -787,40 +802,68 @@
             comSavePanel.Size = new System.Drawing.Size(31, 158);
             comSavePanel.TabIndex = 2;
             // 
-            // coms_plus
+            // comsList_save
             // 
-            coms_plus.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            coms_plus.Font = new System.Drawing.Font("Arial", 12.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            coms_plus.Location = new System.Drawing.Point(2, 100);
-            coms_plus.Margin = new System.Windows.Forms.Padding(2);
-            coms_plus.Name = "coms_plus";
-            coms_plus.Size = new System.Drawing.Size(27, 26);
-            coms_plus.TabIndex = 0;
-            coms_plus.Text = "+";
-            coms_plus.UseVisualStyleBackColor = true;
+            comsList_save.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comsList_save.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            comsList_save.Location = new System.Drawing.Point(2, 2);
+            comsList_save.Margin = new System.Windows.Forms.Padding(2);
+            comsList_save.Name = "comsList_save";
+            comsList_save.Size = new System.Drawing.Size(27, 26);
+            comsList_save.TabIndex = 2;
+            comsList_save.Text = "💾";
+            comsList_save.UseVisualStyleBackColor = true;
+            comsList_save.Click += comsList_save_Click;
             // 
-            // coms_minus
+            // comsList_moveUp
             // 
-            coms_minus.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            coms_minus.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            coms_minus.Location = new System.Drawing.Point(2, 130);
-            coms_minus.Margin = new System.Windows.Forms.Padding(2);
-            coms_minus.Name = "coms_minus";
-            coms_minus.Size = new System.Drawing.Size(27, 26);
-            coms_minus.TabIndex = 1;
-            coms_minus.Text = "➖";
-            coms_minus.UseVisualStyleBackColor = true;
+            comsList_moveUp.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comsList_moveUp.Location = new System.Drawing.Point(2, 100);
+            comsList_moveUp.Margin = new System.Windows.Forms.Padding(2);
+            comsList_moveUp.Name = "comsList_moveUp";
+            comsList_moveUp.Size = new System.Drawing.Size(27, 26);
+            comsList_moveUp.TabIndex = 3;
+            comsList_moveUp.Text = "▲";
+            comsList_moveUp.UseVisualStyleBackColor = true;
+            comsList_moveUp.Click += comsList_moveUp_Click;
             // 
-            // button2
+            // comsList_add
             // 
-            button2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            button2.Location = new System.Drawing.Point(2, 2);
-            button2.Margin = new System.Windows.Forms.Padding(2);
-            button2.Name = "button2";
-            button2.Size = new System.Drawing.Size(27, 26);
-            button2.TabIndex = 2;
-            button2.Text = "💾";
-            button2.UseVisualStyleBackColor = true;
+            comsList_add.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comsList_add.Font = new System.Drawing.Font("Arial", 12.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            comsList_add.Location = new System.Drawing.Point(2, 32);
+            comsList_add.Margin = new System.Windows.Forms.Padding(2);
+            comsList_add.Name = "comsList_add";
+            comsList_add.Size = new System.Drawing.Size(27, 26);
+            comsList_add.TabIndex = 0;
+            comsList_add.Text = "+";
+            comsList_add.UseVisualStyleBackColor = true;
+            comsList_add.Click += comsList_add_Click;
+            // 
+            // comsList_remove
+            // 
+            comsList_remove.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comsList_remove.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            comsList_remove.Location = new System.Drawing.Point(2, 62);
+            comsList_remove.Margin = new System.Windows.Forms.Padding(2);
+            comsList_remove.Name = "comsList_remove";
+            comsList_remove.Size = new System.Drawing.Size(27, 26);
+            comsList_remove.TabIndex = 1;
+            comsList_remove.Text = "➖";
+            comsList_remove.UseVisualStyleBackColor = true;
+            comsList_remove.Click += comsList_remove_Click;
+            // 
+            // comsList_moveDown
+            // 
+            comsList_moveDown.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comsList_moveDown.Location = new System.Drawing.Point(2, 130);
+            comsList_moveDown.Margin = new System.Windows.Forms.Padding(2);
+            comsList_moveDown.Name = "comsList_moveDown";
+            comsList_moveDown.Size = new System.Drawing.Size(27, 26);
+            comsList_moveDown.TabIndex = 4;
+            comsList_moveDown.Text = "▼";
+            comsList_moveDown.UseVisualStyleBackColor = true;
+            comsList_moveDown.Click += comsList_moveDown_Click;
             // 
             // comBottomPanel
             // 
@@ -839,6 +882,14 @@
             comBottomPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             comBottomPanel.Size = new System.Drawing.Size(748, 60);
             comBottomPanel.TabIndex = 0;
+            // 
+            // saveFileDialog1
+            // 
+            saveFileDialog1.AutoUpgradeEnabled = false;
+            saveFileDialog1.FileName = "favorites.mcfunction";
+            saveFileDialog1.Filter = "mcfunction Files (*.mcfunction)|*.mcfunction|All Files (*.*)|*.*";
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.SupportMultiDottedExtensions = true;
             // 
             // Form1
             // 
@@ -931,11 +982,14 @@
         private System.Windows.Forms.TrackBar comPara_volmin_bar;
         private System.Windows.Forms.TrackBar comPara_vol_bar;
         private System.Windows.Forms.TableLayoutPanel comSavePanel;
-        private System.Windows.Forms.Button coms_plus;
-        private System.Windows.Forms.Button coms_minus;
+        private System.Windows.Forms.Button comsList_add;
+        private System.Windows.Forms.Button comsList_remove;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button comsList_save;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button comsList_moveUp;
+        private System.Windows.Forms.Button comsList_moveDown;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

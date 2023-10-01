@@ -680,10 +680,10 @@ namespace Playsounder
         bool openedUI = false;
         private void Toggle_CommandPanel()
         {
-            pathPanel.Height = this.ClientSize.Height - comBottomPanel.Height - 4;
+            pathPanel.Height = this.ClientSize.Height - comBottomPanel.Height - 3;
             if (openedUI)
             {
-                pathPanel.Height -= comUpPanel.Height + 8;
+                pathPanel.Height -= comUpPanel.Height + 7;
             }
             else
             {
@@ -765,6 +765,7 @@ namespace Playsounder
             UpdateCommand();
         }
 
+        private string fileName;
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             listBox_coms.SelectionMode = SelectionMode.None;
@@ -774,7 +775,7 @@ namespace Playsounder
 
             try
             {
-                string fileName = dialog.FileName;
+                fileName = dialog.FileName;
                 comPara_selectedFile.Text = Path.GetFileName(fileName);
 
                 // 同期的に全行読み込み
@@ -783,6 +784,8 @@ namespace Playsounder
                 // バインディングリストを作成し、これをデータソースに設定
                 listBox_coms.DataSource = new BindingList<string>(lines);
                 listBox_coms.SelectionMode = SelectionMode.One;
+
+                comsList_save.Font = new Font(comsList_save.Font, FontStyle.Regular);
             }
             catch (Exception ex)
             {
@@ -851,6 +854,162 @@ namespace Playsounder
                 }
             }
         }
+
+
+        private void MoveSelectedItem(int direction)
+        {
+            if (listBox_coms.SelectedItem == null) return;
+            int currentIndex = listBox_coms.SelectedIndex;
+
+            int newIndex = currentIndex + direction;
+            if (newIndex < 0 || newIndex >= listBox_coms.Items.Count) return;
+
+            listBox_coms.SelectionMode = SelectionMode.None;
+            var items = listBox_coms.Items.Cast<string>().ToList();
+            var itemToMove = items[currentIndex];
+            items.RemoveAt(currentIndex);
+            items.Insert(newIndex, itemToMove);
+
+            listBox_coms.DataSource = null;
+            listBox_coms.DataSource = items;
+            listBox_coms.SelectionMode = SelectionMode.One;
+            listBox_coms.SelectedIndex = newIndex;
+        }
+        private void comsList_moveUp_Click(object sender, EventArgs e)
+        {
+            MoveSelectedItem(-1);
+        }
+        private void comsList_moveDown_Click(object sender, EventArgs e)
+        {
+            MoveSelectedItem(1);
+        }
+
+        private void listBox_coms_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            var listBox = sender as ListBox;
+            if (listBox == null) return;
+
+            var item = listBox.Items[e.Index].ToString();
+
+            bool shouldDrawDefaultBackground = false;
+            if (item.Contains("playsound"))
+            {
+                int index = item.IndexOf("playsound") + "playsound".Length;
+                string[] words = item.Substring(index).Trim().Split(' ');
+
+                if (words.Length == 9) // "playsound"の後に半角スペース区切りで9つの単語が存在する場合
+                {
+                    shouldDrawDefaultBackground = true;
+                }
+            }
+
+            if (shouldDrawDefaultBackground)
+            {
+                e.DrawBackground(); // デフォルトの背景色
+            }
+            else
+            {
+                e.Graphics.FillRectangle(Brushes.LightGray, e.Bounds); // 背景を薄灰色に描画
+            }
+
+            e.Graphics.DrawString(item, e.Font, Brushes.Black, e.Bounds); // デフォルトの文字色
+            e.DrawFocusRectangle(); // フォーカス矩形
+        }
+
+        private void comsList_add_Click(object sender, EventArgs e)
+        {
+            string newItem = CommandText.Text.Trim();
+            if (!string.IsNullOrEmpty(newItem))
+            {
+                var items = listBox_coms.Items.Cast<string>().ToList();
+                int insertIndex = listBox_coms.SelectedIndex >= 0 ? listBox_coms.SelectedIndex + 1 : items.Count;
+                items.Insert(insertIndex, newItem);
+
+                listBox_coms.DataSource = null; // リストボックスのデータソースを一時的にnullにする
+                listBox_coms.DataSource = items; // 更新したitemsリストをデータソースに設定
+                listBox_coms.SelectionMode = SelectionMode.One;
+                listBox_coms.SelectedIndex = insertIndex; // 追加した項目を選択状態にする
+            }
+        }
+
+        private bool isRemoveConfirmedOnce = false;
+        private void comsList_remove_Click(object sender, EventArgs e)
+        {
+            if (listBox_coms.SelectedItem == null) return;
+
+            if (!isRemoveConfirmedOnce)
+            {
+                DialogResult result = MessageBox.Show("Do you want to remove the selected item?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.No) return;
+                isRemoveConfirmedOnce = true;
+            }
+
+            int selectedIndex = listBox_coms.SelectedIndex;
+            var items = listBox_coms.Items.Cast<string>().ToList();
+
+            if (selectedIndex < 0 || selectedIndex >= items.Count) return;
+            items.RemoveAt(selectedIndex);
+
+            listBox_coms.DataSource = null;
+            listBox_coms.DataSource = items;
+
+            listBox_coms.SelectedIndex = selectedIndex > 0 ? selectedIndex - 1 : (items.Count > 0 ? 0 : -1);
+        }
+
+        private void comsList_save_Click(object sender, EventArgs e)
+        {
+            if (listBox_coms.Items.Count == 0) return;
+
+            string selectedFile = !string.IsNullOrWhiteSpace(comPara_selectedFile.Text) ? comPara_selectedFile.Text : "favorites.mcfunction";
+
+            // fileNameが空、またはcomPara_selectedFileがfileNameのファイル名と異なる場合は、SaveFileDialogを表示
+            if (string.IsNullOrEmpty(fileName) || Path.GetFileName(fileName) != selectedFile)
+            {
+                saveFileDialog1.FileName = selectedFile;
+                if (saveFileDialog1.ShowDialog() != DialogResult.OK)
+                {
+                    // ユーザーが「キャンセル」をクリックした場合は、処理を中断
+                    return;
+                }
+
+                // ユーザーが選択したファイルのパスを取得
+                fileName = saveFileDialog1.FileName;
+            }
+
+            try
+            {
+                // ファイルを保存
+                File.WriteAllLines(fileName, listBox_coms.Items.Cast<string>().ToArray());
+                comsList_save.Font = new Font(comsList_save.Font, FontStyle.Regular);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while saving the file: {ex.Message}\n{ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void listBox_coms_DataSourceChanged(object sender, EventArgs e)
+        {
+            var listBox = sender as ListBox;
+            if (listBox == null) return;
+
+            var currentDataSource = listBox.DataSource as List<string> ?? new List<string>();
+
+            if (currentDataSource.Any())
+            {
+                comsList_save.Font = new Font(comsList_save.Font, FontStyle.Bold); // フォントを太字に変更
+            }
+            else
+            {
+                comsList_save.Font = new Font(comsList_save.Font, FontStyle.Regular); // フォントを通常に戻す
+            }
+        }
+
+
 
 
     }
