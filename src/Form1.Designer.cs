@@ -610,7 +610,7 @@
             comPara_volmin.Size = new System.Drawing.Size(30, 23);
             comPara_volmin.TabIndex = 0;
             comPara_volmin.Text = " ";
-            comPara_volmin.TextChanged += comPara_TextUpdate;
+            comPara_volmin.TextChanged += comPara_volmin_TextChanged;
             // 
             // comPara_volmin_bar
             // 
@@ -620,6 +620,7 @@
             comPara_volmin_bar.Name = "comPara_volmin_bar";
             comPara_volmin_bar.Size = new System.Drawing.Size(75, 25);
             comPara_volmin_bar.TabIndex = 1;
+            comPara_volmin_bar.Scroll += comPara_volmin_bar_Scroll;
             // 
             // comFilePanel
             // 
@@ -750,7 +751,7 @@
             comPara_vol.Name = "comPara_vol";
             comPara_vol.Size = new System.Drawing.Size(30, 23);
             comPara_vol.TabIndex = 0;
-            comPara_vol.TextChanged += comPara_TextUpdate;
+            comPara_vol.TextChanged += comPara_vol_TextChanged;
             // 
             // comPara_vol_bar
             // 
@@ -761,6 +762,7 @@
             comPara_vol_bar.Size = new System.Drawing.Size(75, 25);
             comPara_vol_bar.TabIndex = 1;
             comPara_vol_bar.Value = 10;
+            comPara_vol_bar.Scroll += comPara_vol_bar_Scroll;
             // 
             // listBox_coms
             // 

@@ -963,10 +963,10 @@ namespace Playsounder
         {
             if (listBox_coms.Items.Count == 0) return;
 
-            string selectedFile = !string.IsNullOrWhiteSpace(comPara_selectedFile.Text) ? comPara_selectedFile.Text : "favorites.mcfunction";
+            string selectedFile = string.IsNullOrWhiteSpace(comPara_selectedFile.Text) ? "favorites.mcfunction" : comPara_selectedFile.Text;
 
             // fileNameが空、またはcomPara_selectedFileがfileNameのファイル名と異なる場合は、SaveFileDialogを表示
-            if (string.IsNullOrEmpty(fileName) || Path.GetFileName(fileName) != selectedFile)
+            if (string.IsNullOrEmpty(fileName) || string.IsNullOrWhiteSpace(comPara_selectedFile.Text) || Path.GetFileName(fileName) != selectedFile)
             {
                 saveFileDialog1.FileName = selectedFile;
                 if (saveFileDialog1.ShowDialog() != DialogResult.OK)
@@ -1009,6 +1009,51 @@ namespace Playsounder
             }
         }
 
+        //comPara_vol_barで0.0～1.0の範囲の値を取得し、comPara_volに反映
+        //comPara_volで0.0～1.0の範囲の値を取得し、comPara_vol_barに反映、0以下の場合は0.0に、1以上の場合は1.0にクリップ
+        private void comPara_vol_bar_Scroll(object sender, EventArgs e)
+        {
+            comPara_vol.Text = (comPara_vol_bar.Value * 0.1).ToString("F2", CultureInfo.InvariantCulture).TrimEnd('0').TrimEnd('.');
+        }
+        private void comPara_vol_TextChanged(object sender, EventArgs e)
+        {
+            if (float.TryParse(comPara_vol.Text, out float enteredVolume))
+            {
+                // enteredVolumeの値を0.0と1.0の間にクリップ
+                enteredVolume = Math.Max(0.0f, Math.Min(1.0f, enteredVolume));
+
+                // 0.0～1.0の範囲を0～10の範囲にマッピング
+                int newValue = (int)(enteredVolume * 10);
+
+                // comPara_vol_barのValueを更新
+                comPara_vol_bar.Value = newValue;
+                PlayVolume = enteredVolume;
+            }
+            PlayButton_Click(sender, e);
+            UpdateCommand();
+        }
+        //comPara_volmin_barやcomPara_volminでも同様の処理を行う
+        private void comPara_volmin_bar_Scroll(object sender, EventArgs e)
+        {
+            comPara_volmin.Text = (comPara_volmin_bar.Value * 0.1).ToString("F2", CultureInfo.InvariantCulture).TrimEnd('0').TrimEnd('.');
+        }
+        private void comPara_volmin_TextChanged(object sender, EventArgs e)
+        {
+            if (float.TryParse(comPara_volmin.Text, out float enteredVolume))
+            {
+                // enteredVolumeの値を0.0と1.0の間にクリップ
+                enteredVolume = Math.Max(0.0f, Math.Min(1.0f, enteredVolume));
+
+                // 0.0～1.0の範囲を0～10の範囲にマッピング
+                int newValue = (int)(enteredVolume * 10);
+
+                // comPara_volmin_barのValueを更新
+                comPara_volmin_bar.Value = newValue;
+                PlayVolume = enteredVolume;
+            }
+            PlayButton_Click(sender, e);
+            UpdateCommand();
+        }
 
 
 
