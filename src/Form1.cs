@@ -5,15 +5,15 @@ using Newtonsoft.Json.Linq;
 using NVorbis;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-
-
-
 namespace Playsounder
 {
 
@@ -103,6 +103,7 @@ namespace Playsounder
         public static int handle;
 
 
+
         public Form1()
         {
             InitializeComponent();
@@ -181,8 +182,8 @@ namespace Playsounder
                 // 非表示の場合は横幅を0に設定
                 if (!listBox.Visible)
                 {
-                    tableLayoutPanel1.ColumnStyles[listBoxNumber - 1].SizeType = SizeType.Absolute;
-                    tableLayoutPanel1.ColumnStyles[listBoxNumber - 1].Width = 0;
+                    pathPanel.ColumnStyles[listBoxNumber - 1].SizeType = SizeType.Absolute;
+                    pathPanel.ColumnStyles[listBoxNumber - 1].Width = 0;
                     return;
                 }
 
@@ -194,9 +195,10 @@ namespace Playsounder
                 maxTextWidth += 25; // Margin or padding width
 
                 // 3. 対応するColumnの幅を調整
-                tableLayoutPanel1.ColumnStyles[listBoxNumber - 1].SizeType = SizeType.Absolute;
-                tableLayoutPanel1.ColumnStyles[listBoxNumber - 1].Width = maxTextWidth;
+                pathPanel.ColumnStyles[listBoxNumber - 1].SizeType = SizeType.Absolute;
+                pathPanel.ColumnStyles[listBoxNumber - 1].Width = maxTextWidth;
             }
+
         }
 
 
@@ -207,8 +209,8 @@ namespace Playsounder
             // UIの初期化
             for (int r = 1; r <= 6; r++)
             {
-                Label labelControl = this.tableLayoutPanel1.Controls["label" + r] as Label;
-                ListBox listBoxControl = this.tableLayoutPanel1.Controls["listBox" + r] as ListBox;
+                Label labelControl = this.pathPanel.Controls["label" + r] as Label;
+                ListBox listBoxControl = this.pathPanel.Controls["listBox" + r] as ListBox;
                 labelControl?.ResetText();
                 listBoxControl?.Items.Clear();
                 if (listBoxControl != null)
@@ -312,7 +314,7 @@ namespace Playsounder
         {
             if (nextCategories.Count == 0) return;
 
-            Control targetControl = this.tableLayoutPanel1.Controls["listBox" + nextListBoxNumber];
+            Control targetControl = this.pathPanel.Controls["listBox" + nextListBoxNumber];
             if (targetControl is ListBox targetListBox)
             {
                 targetListBox.Items.AddRange(nextCategories.ToArray());
@@ -346,7 +348,7 @@ namespace Playsounder
             }
 
             // listBox6の選択を更新
-            ListBox listBox6 = (ListBox)this.tableLayoutPanel1.Controls["listBox6"];
+            ListBox listBox6 = (ListBox)this.pathPanel.Controls["listBox6"];
             if (listBox6.Items.Count > randomIndex)
             {
                 listBox6.SelectedIndex = randomIndex;
@@ -402,7 +404,7 @@ namespace Playsounder
             int listBoxIndex = int.Parse(Regex.Match(currentListBox.Name, @"\d").Value);
             for (int i = 1; i < listBoxIndex; i++)
             {
-                Control previousList = this.tableLayoutPanel1.Controls["listBox" + i];
+                Control previousList = this.pathPanel.Controls["listBox" + i];
                 if (previousList is ListBox previousListBox && previousListBox.SelectedItem != null)
                 {
                     fullPath.Append(previousListBox.SelectedItem.ToString()).Append(".");
@@ -421,7 +423,7 @@ namespace Playsounder
         {
             for (int i = startingFrom; i <= 6; i++)
             {
-                Control list = this.tableLayoutPanel1.Controls["listBox" + i];
+                Control list = this.pathPanel.Controls["listBox" + i];
                 if (list is ListBox listBoxToClear)
                 {
                     listBoxToClear.Items.Clear();
@@ -469,7 +471,7 @@ namespace Playsounder
                 }
             }
 
-            ListBox listBox6 = (ListBox)this.tableLayoutPanel1.Controls["listBox6"];
+            ListBox listBox6 = (ListBox)this.pathPanel.Controls["listBox6"];
 
             listBox6.Items.AddRange(soundPathMapping.Keys.ToArray());
             listBox6.Visible = true;
@@ -522,6 +524,22 @@ namespace Playsounder
             PlaySpeed = Math.Max(0.5f, Math.Min(2.0f, PlaySpeed));
             Plays();
         }
+        private void UpdateCommand()
+        {
+            List<string> commandParts = new List<string>
+                {
+                    "playsound minecraft:" + _selectedFullPath,
+                    comPara_source.Text,
+                    comPara_selector.Text,
+                    comPara_posx.Text,
+                    comPara_posy.Text,
+                    comPara_posz.Text,
+                    comPara_vol.Text,
+                    PlaySpeed.ToString(),
+                    comPara_volmin.Text
+                };
+            CommandText.Text = string.Join(" ", commandParts);
+        }
         private void Plays()
         {
             DisposeSoundResources();
@@ -535,9 +553,7 @@ namespace Playsounder
 
             if (comboBox2.SelectedIndex == 0)
             {
-                _generatedCommand = "playsound minecraft:" + _selectedFullPath
-                    + " master @a ~ ~ ~ 1 " + PlaySpeed + " 0";
-                CommandText.Text = _generatedCommand;
+                UpdateCommand();
             }
             else
             {
@@ -652,11 +668,41 @@ namespace Playsounder
             }
         }
 
+
         private void Form1_Load(object sender, EventArgs e)
         {
             comboBox2.SelectedIndex = 0;  // 最初のアイテムをデフォルトで選択
-        }
+            Toggle_CommandPanel();
+            Initialization_CommandPanel(); // commandタブに初期値反映
+            CommandText.Text = " ";
 
+        }
+        bool openedUI = false;
+        private void Toggle_CommandPanel()
+        {
+            pathPanel.Height = this.ClientSize.Height - comBottomPanel.Height - 4;
+            if (openedUI)
+            {
+                pathPanel.Height -= comUpPanel.Height + 8;
+            }
+            else
+            {
+            }
+            openedUI = !openedUI;
+        }
+        private void Initialization_CommandPanel()
+        {
+            comPara_selectedFile.Text = " ";
+            List<string> items = new List<string> { "master", "music", "record", "weather", "block", "hostile", "neutral", "player", "ambient", "voice" };
+            comPara_source.Items.AddRange(items.ToArray());
+            comPara_source.SelectedIndex = 0;
+            comPara_selector.Text = "@a";
+            comPara_posx.Text = "~";
+            comPara_posy.Text = "~";
+            comPara_posz.Text = "~";
+            comPara_vol.Text = "1.0";
+            comPara_volmin.Text = "0.0";
+        }
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (soundsJson != null && IsSoundPath(_selectedFullPath))
@@ -668,5 +714,144 @@ namespace Playsounder
                 CommandText.Text = " ";
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Toggle_CommandPanel();
+        }
+        private void button1_Paint(object sender, PaintEventArgs e)
+        {
+            string symbol;
+            if (openedUI)
+            {
+                symbol = "▲";
+            }
+            else
+            {
+                symbol = "▼";
+            }
+
+            // ボタンの中心を計算
+            int centerX = 8;
+            int centerY = 8;
+
+            // FontとBrushを設定
+            Font font = new Font("Arial", 16, FontStyle.Bold); // フォントの種類とサイズを設定
+            Brush brush = Brushes.Black; // 描画色を設定
+
+            // スケール変換の値
+            float scaleX = 2.0f; // 横方向のスケール値
+            float scaleY = 1.0f; // 縦方向のスケール値
+
+            using (GraphicsPath path = new GraphicsPath())
+            {
+                // 文字をGraphicsPathに追加
+                path.AddString(symbol, font.FontFamily, (int)font.Style, font.Size, new Point(centerX, centerY), new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+
+                // 変換マトリクスを作成してスケール変換を適用
+                Matrix transformMatrix = new Matrix();
+                transformMatrix.Scale(scaleX, scaleY);
+
+                // 変換を適用
+                path.Transform(transformMatrix);
+
+                // 描画
+                e.Graphics.FillPath(brush, path);
+            }
+        }
+
+        private void comPara_TextUpdate(object sender, EventArgs e)
+        {
+            UpdateCommand();
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            listBox_coms.SelectionMode = SelectionMode.None;
+
+            var dialog = sender as OpenFileDialog;
+            if (dialog == null) return;
+
+            try
+            {
+                string fileName = dialog.FileName;
+                comPara_selectedFile.Text = Path.GetFileName(fileName);
+
+                // 同期的に全行読み込み
+                var lines = File.ReadAllLines(fileName);
+
+                // バインディングリストを作成し、これをデータソースに設定
+                listBox_coms.DataSource = new BindingList<string>(lines);
+                listBox_coms.SelectionMode = SelectionMode.One;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while reading the file: {ex.Message}\n{ex.StackTrace}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button_selectFile_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Visible)
+            {
+                openFileDialog1.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a version first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void listBox_coms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox_coms.SelectedItem != null)
+            {
+                string selectedText = listBox_coms.SelectedItem.ToString();
+
+                if (selectedText.Contains("playsound"))
+                {
+                    int index = selectedText.IndexOf("playsound") + "playsound".Length;
+                    string playsoundFollowing = selectedText.Substring(index).Trim();
+
+                    List<string> words = playsoundFollowing.Split(' ').ToList();
+
+                    // 9つの単語がある場合のみ処理を進める
+                    if (words.Count == 9)
+                    {
+                        _selectedFullPath = words[0].StartsWith("minecraft:") ? words[0].Substring("minecraft:".Length) : words[0];
+                        List<string> fullPathList = _selectedFullPath.Split('.').ToList();
+                        if (fullPathList == null || !fullPathList.Any()) return;
+
+                        for (int i = 0; i < fullPathList.Count; i++)
+                        {
+                            Control control = this.Controls.Find("listBox" + (i + 1), true).FirstOrDefault();
+                            if (control is ListBox listBox)
+                            {
+                                int selectedIndex = listBox.FindString(fullPathList[i]);
+                                if (selectedIndex != -1)
+                                {
+                                    listBox.SelectedIndex = selectedIndex;
+                                    listBox_SelectedIndexChanged(listBox, EventArgs.Empty);
+                                }
+                            }
+                        }
+
+
+
+
+                        comPara_source.Text = words[1];
+                        comPara_selector.Text = words[2];
+                        comPara_posx.Text = words[3];
+                        comPara_posy.Text = words[4];
+                        comPara_posz.Text = words[5];
+                        comPara_vol.Text = words[6];
+                        PitchText.Text = words[7];
+                        comPara_volmin.Text = words[8];
+                    }
+                }
+            }
+        }
+
+
     }
 }
