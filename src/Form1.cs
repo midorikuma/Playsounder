@@ -265,6 +265,7 @@ namespace Playsounder
         private string _globalSoundPath;
         private void listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            PlaySpeed = BarSpeed;
             if (!(sender is ListBox currentListBox))
                 return;
 
@@ -280,6 +281,7 @@ namespace Playsounder
             // 同じパスで、さらに音のパスである場合には、ランダムな音を再生する。
             if (_selectedFullPath == newPath && IsSoundPath(newPath))
             {
+                DisposeSoundResources();
                 PlayRandomSoundFromPath(newPath);
                 return;
             }
@@ -300,6 +302,7 @@ namespace Playsounder
             if (IsSoundPath(_selectedFullPath))
             {
                 UpdateAndShowSoundList(_selectedFullPath);
+                DisposeSoundResources();
                 PlayRandomSoundFromPath(_selectedFullPath);
             }
         }
@@ -331,6 +334,8 @@ namespace Playsounder
 
         private void PlayRandomSoundFromPath(string soundPath)
         {
+            // パスが存在しない場合はメソッドを終了
+            if (soundsJson == null) return;
             var soundArray = soundsJson[soundPath]["sounds"].ToArray();
             if (soundArray.Length == 0) return;
 
@@ -384,6 +389,7 @@ namespace Playsounder
             }
 
             _globalSoundPath = "minecraft/sounds/" + fullPath + ".ogg";
+            DisposeSoundResources();
             PlaySound();
         }
 
@@ -481,7 +487,7 @@ namespace Playsounder
 
             // Handle the visibility of label6 when listBox6 becomes visible
             label6.Visible = true;
-            label6.Text = "ogg files";
+            label6.Text = ".ogg";
         }
 
 
@@ -516,36 +522,16 @@ namespace Playsounder
                 return _source.Read(buffer, offset, count);
             }
         }
+
         private void PlaySound()
         {
             if (!float.TryParse(PitchText.Text, out var n)) return;
-            PlaySpeed = float.Parse(PitchText.Text);
             // PlaySpeedの値を0.5と2.0の間にクリップ
             PlaySpeed = Math.Max(0.5f, Math.Min(2.0f, PlaySpeed));
-            Plays();
-        }
-        private void UpdateCommand()
-        {
-            List<string> commandParts = new List<string>
-                {
-                    "playsound minecraft:" + _selectedFullPath,
-                    comPara_source.Text,
-                    comPara_selector.Text,
-                    comPara_posx.Text,
-                    comPara_posy.Text,
-                    comPara_posz.Text,
-                    comPara_vol.Text,
-                    PlaySpeed.ToString(),
-                    comPara_volmin.Text
-                };
-            CommandText.Text = string.Join(" ", commandParts);
-        }
-        private void Plays()
-        {
-            DisposeSoundResources();
-            if (_globalSoundPath == null) return;
+            string soundPath = _globalSoundPath;
+            if (soundPath == null) return;
 
-            var soundData = objects?[_globalSoundPath];
+            var soundData = objects?[soundPath];
             string PlayHash = soundData?["hash"]?.ToString();
 
             // ハッシュが見つからなかった場合はメソッドを終了
@@ -562,9 +548,7 @@ namespace Playsounder
 
             float volume = MuteButton.Checked ? 0f : PlayVolume;
 
-            _waveSource = new NvorbisToCSCore(RootPath + @"assets\objects\" + PlayHash.Substring(0, 2) + @"\" + PlayHash);
-
-            // Adjust the playback speed using our custom PlaybackSpeedAdjuster
+            var _waveSource = new NvorbisToCSCore(RootPath + @"assets\objects\" + PlayHash.Substring(0, 2) + @"\" + PlayHash);
             var playbackSpeedAdjuster = new PlaybackSpeedAdjuster(_waveSource.ToSampleSource(), PlaySpeed);
 
             _soundOut = new WasapiOut();
@@ -572,24 +556,81 @@ namespace Playsounder
             _soundOut.Volume = volume;
             _soundOut.Play();
         }
-
-
-
-
+        private void UpdateCommand()
+        {
+            List<string> commandParts = new List<string>
+                {
+                    "playsound minecraft:" + _selectedFullPath,
+                    comPara_source.Text,
+                    comPara_selector.Text,
+                    comPara_posx.Text,
+                    comPara_posy.Text,
+                    comPara_posz.Text,
+                    comPara_vol.Text,
+                    PlaySpeed.ToString(CultureInfo.InvariantCulture),
+                    comPara_volmin.Text
+                };
+            CommandText.Text = string.Join(" ", commandParts);
+        }
 
 
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-            PlaySpeed = BarSpeed;
-            PlaySound();
+            DisposeSoundResources();
+            //playCheckboxSelectedがチェックされている場合
+            if (playCheckboxSelected.Checked || playCheckboxNotSelected.Checked)
+            {
+                //itemsのリスト作成
+                List<string> items = new List<string>();
+                //playCheckboxSelectedをチェック時にitemsをlistBox_coms.SelectedItemsへ追加
+                if (playCheckboxSelected.Checked) items.AddRange(listBox_coms.SelectedItems.Cast<string>());
+                //playCheckboxNotSelectedをチェック時にitemsへlistBox_comsでSelectedしていない項目を追加(重複なども考慮してindexで指定、無選択時にはnull回避)
+                if (playCheckboxNotSelected.Checked) items.AddRange(listBox_coms.Items.Cast<string>().ToList().Where((item, index) => !listBox_coms.SelectedIndices.Contains(index)));
+                //リストの要素数分、パスやピッチ、をリストとして取得
+                List<string> paths = new List<string>();
+                List<string> pitches = new List<string>();
+                List<string> volumes = new List<string>();
+                foreach (var item in items)
+                {
+                    if (item.Contains("playsound"))
+                    {
+                        int index = item.IndexOf("playsound") + "playsound".Length;
+                        string[] words = item.Substring(index).Trim().Split(' ');
+
+                        if (words.Length == 9) // "playsound"の後に半角スペース区切りで9つの単語が存在する場合
+                        {
+                            paths.Add(words[0].StartsWith("minecraft:") ? words[0].Substring("minecraft:".Length) : words[0]);
+                            pitches.Add(words[7]);
+                            volumes.Add(words[6]);
+                        }
+                    }
+                }
+                //リストの要素数分、サウンドを同時再生
+                for (int i = 0; i < paths.Count; i++)
+                {
+                    PlaySpeed = float.Parse(pitches[i], CultureInfo.InvariantCulture);
+                    PlayVolume = float.Parse(volumes[i], CultureInfo.InvariantCulture);
+                    PlayRandomSoundFromPath(paths[i]);
+                }
+            }
+            //playCheckboxParameterがチェックされている場合
+            if (playCheckboxParameter.Checked)
+            {
+                PlaySpeed = BarSpeed;
+                if (_selectedFullPath != null) PlayRandomSoundFromPath(_selectedFullPath);
+            }
+            PlaySpeed = float.Parse(PitchText.Text, CultureInfo.InvariantCulture);
+            PlayVolume = 1 + VolumeBar.Value * 0.01f;
+            UpdateCommand();
         }
 
         private void PitchButton_Click(object sender, EventArgs e)
         {
             Button NowPitch = (Button)sender;
-            PlaySpeed = float.Parse(NowPitch.Text);
-            Plays();
+            PlaySpeed = float.Parse(NowPitch.Text, CultureInfo.InvariantCulture);
+            DisposeSoundResources();
+            if (_selectedFullPath != null) PlayRandomSoundFromPath(_selectedFullPath);
         }
 
         private void StopButton_Click(object sender, EventArgs e)
@@ -599,15 +640,16 @@ namespace Playsounder
                 _soundOut.Stop();
             }
         }
+        private bool ignoreEvents = false; // イベントを無視するかどうかを制御するフラグ
+
         private void PitchText_TextChanged(object sender, EventArgs e)
         {
-            // PitchTextの値をfloatとして取得
-            if (float.TryParse(PitchText.Text, out float enteredSpeed))
+            if (ignoreEvents) return; // イベントを無視する場合、ここで処理を中断
+
+            if (float.TryParse(PitchText.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out float enteredSpeed))
             {
-                // enteredSpeedの値を0.5と2.0の間にクリップ
                 enteredSpeed = Math.Max(0.5f, Math.Min(2.0f, enteredSpeed));
 
-                // 0.5～2.0の範囲を-100～100の範囲にマッピング
                 int newValue;
                 if (enteredSpeed >= 1.0f)
                 {
@@ -618,14 +660,19 @@ namespace Playsounder
                     newValue = (int)((enteredSpeed - 1) * 200);
                 }
 
-                // PitchBarのValueを更新
+                ignoreEvents = true; // PitchBarのValueを設定する前に、イベントを一時的に無効にする
                 PitchBar.Value = newValue;
                 BarSpeed = enteredSpeed;
+                ignoreEvents = false; // 更新が終わったら、イベントを再び有効にする
             }
-            PlayButton_Click(sender, e);
+
+            PlayButton_Click(null, EventArgs.Empty);
         }
+
         private void PitchBar_Scroll(object sender, EventArgs e)
         {
+            if (ignoreEvents) return; // イベントを無視する場合、ここで処理を中断
+
             int i = PitchBar.Value;
             if (i < 0)
             {
@@ -635,8 +682,13 @@ namespace Playsounder
             {
                 BarSpeed = 1 + i * 1.0f / PitchBar.Maximum;
             }
+
+            ignoreEvents = true; // PitchTextのテキストを更新する前に、イベントを一時的に無効にする
+            // InvariantCultureを使用して、小数点が常にピリオドであることを確認します。
             PitchText.Text = BarSpeed.ToString("F3", CultureInfo.InvariantCulture).TrimEnd('0').TrimEnd('.');
+            ignoreEvents = false; // 更新が終わったら、イベントを再び有効にする
         }
+
 
         private void VolumeBar_Scroll(object sender, EventArgs e)
         {
@@ -645,6 +697,12 @@ namespace Playsounder
 
         private void CopyButton_Click(object sender, EventArgs e)
         {
+            //言語圏デバッグ
+            //var culture = new CultureInfo("ja-JP");
+            //var culture = new CultureInfo("de-DE");
+            //CultureInfo.DefaultThreadCurrentCulture = culture;
+            //CultureInfo.DefaultThreadCurrentUICulture = culture;
+
             CommandText.Focus();
             CommandText.SelectAll();
             Clipboard.SetText(CommandText.Text);
@@ -675,15 +733,17 @@ namespace Playsounder
             Toggle_CommandPanel();
             Initialization_CommandPanel(); // commandタブに初期値反映
             CommandText.Text = " ";
+            checkBoxPanel.Visible = false;  //最初は全再生ボタン非表示
+            playCheckboxParameter.Checked = true; //最初はParameterチェック
 
         }
         bool openedUI = false;
         private void Toggle_CommandPanel()
         {
-            pathPanel.Height = this.ClientSize.Height - comBottomPanel.Height - 3;
+            pathPanel.Height = this.ClientSize.Height - comBottomPanel.Height - 6;
             if (openedUI)
             {
-                pathPanel.Height -= comUpPanel.Height + 7;
+                pathPanel.Height -= comUpPanel.Height + 8;
             }
             else
             {
@@ -783,7 +843,7 @@ namespace Playsounder
 
                 // バインディングリストを作成し、これをデータソースに設定
                 listBox_coms.DataSource = new BindingList<string>(lines);
-                listBox_coms.SelectionMode = SelectionMode.One;
+                listBox_coms.SelectionMode = SelectionMode.MultiExtended;
 
                 comsList_save.Font = new Font(comsList_save.Font, FontStyle.Regular);
             }
@@ -795,99 +855,68 @@ namespace Playsounder
 
         private void button_selectFile_Click(object sender, EventArgs e)
         {
-            if (listBox1.Visible)
-            {
-                openFileDialog1.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Please select a version first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void listBox_coms_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listBox_coms.SelectedItem != null)
-            {
-                string selectedText = listBox_coms.SelectedItem.ToString();
-
-                if (selectedText.Contains("playsound"))
-                {
-                    int index = selectedText.IndexOf("playsound") + "playsound".Length;
-                    string playsoundFollowing = selectedText.Substring(index).Trim();
-
-                    List<string> words = playsoundFollowing.Split(' ').ToList();
-
-                    // 9つの単語がある場合のみ処理を進める
-                    if (words.Count == 9)
-                    {
-                        _selectedFullPath = words[0].StartsWith("minecraft:") ? words[0].Substring("minecraft:".Length) : words[0];
-                        List<string> fullPathList = _selectedFullPath.Split('.').ToList();
-                        if (fullPathList == null || !fullPathList.Any()) return;
-
-                        for (int i = 0; i < fullPathList.Count; i++)
-                        {
-                            Control control = this.Controls.Find("listBox" + (i + 1), true).FirstOrDefault();
-                            if (control is ListBox listBox)
-                            {
-                                int selectedIndex = listBox.FindString(fullPathList[i]);
-                                if (selectedIndex != -1)
-                                {
-                                    listBox.SelectedIndex = selectedIndex;
-                                    listBox_SelectedIndexChanged(listBox, EventArgs.Empty);
-                                }
-                            }
-                        }
-
-
-
-
-                        comPara_source.Text = words[1];
-                        comPara_selector.Text = words[2];
-                        comPara_posx.Text = words[3];
-                        comPara_posy.Text = words[4];
-                        comPara_posz.Text = words[5];
-                        comPara_vol.Text = words[6];
-                        PitchText.Text = words[7];
-                        comPara_volmin.Text = words[8];
-                    }
-                }
-            }
+            openFileDialog1.ShowDialog();
         }
 
 
-        private void MoveSelectedItem(int direction)
+        private void MoveSelectedItems(int direction)
         {
-            if (listBox_coms.SelectedItem == null) return;
-            int currentIndex = listBox_coms.SelectedIndex;
-
-            int newIndex = currentIndex + direction;
-            if (newIndex < 0 || newIndex >= listBox_coms.Items.Count) return;
-
-            listBox_coms.SelectionMode = SelectionMode.None;
+            // リストボックスの項目を保持
             var items = listBox_coms.Items.Cast<string>().ToList();
-            var itemToMove = items[currentIndex];
-            items.RemoveAt(currentIndex);
-            items.Insert(newIndex, itemToMove);
+            //var selectedItems = new List<string>();
+            var selectedIndices = new List<int>();
+            // 移動の方向に応じて、選択項目のインデックスを適切に処理
+            IEnumerable<int> orderedIndices = direction < 0 ?
+                listBox_coms.SelectedIndices.Cast<int>().OrderBy(i => i) :
+                listBox_coms.SelectedIndices.Cast<int>().OrderByDescending(i => i);
 
+            // 選択されている各項目について処理
+            foreach (int index in orderedIndices)
+            {
+                // 移動先のインデックスを計算
+                int newIndex = index + direction;
+
+                // 移動先がリストの範囲外の場合は処理を終了
+                if (newIndex < 0 || newIndex >= items.Count) return;
+
+                // 項目を移動
+                string item = items[index];
+                items.RemoveAt(index);
+                items.Insert(newIndex, item);
+
+                // 移動した項目とインデックスを保存
+                //selectedItems.Add(item);
+                selectedIndices.Add(newIndex);
+            }
+
+            // リストボックスの更新
+            listBox_coms.BeginUpdate();
             listBox_coms.DataSource = null;
             listBox_coms.DataSource = items;
-            listBox_coms.SelectionMode = SelectionMode.One;
-            listBox_coms.SelectedIndex = newIndex;
+            listBox_coms.ClearSelected();
+
+            // 移動した項目を選択状態にする
+            foreach (var newIndex in selectedIndices)
+            {
+                listBox_coms.SetSelected(newIndex, true);
+            }
+            listBox_coms.EndUpdate();
         }
+
         private void comsList_moveUp_Click(object sender, EventArgs e)
         {
-            MoveSelectedItem(-1);
+            MoveSelectedItems(-1);
         }
+
         private void comsList_moveDown_Click(object sender, EventArgs e)
         {
-            MoveSelectedItem(1);
+            MoveSelectedItems(1);
         }
+
 
         private void listBox_coms_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
-
             var listBox = sender as ListBox;
             if (listBox == null) return;
 
@@ -913,6 +942,13 @@ namespace Playsounder
             {
                 e.Graphics.FillRectangle(Brushes.LightGray, e.Bounds); // 背景を薄灰色に描画
             }
+            bool isSelected = ((e.State & DrawItemState.Selected) == DrawItemState.Selected);
+
+            // 項目が選択されている場合は、背景をデフォルトの色(通常の青)にする
+            if (isSelected)
+            {
+                e.Graphics.FillRectangle(SystemBrushes.Highlight, e.Bounds);
+            }
 
             e.Graphics.DrawString(item, e.Font, Brushes.Black, e.Bounds); // デフォルトの文字色
             e.DrawFocusRectangle(); // フォーカス矩形
@@ -924,15 +960,26 @@ namespace Playsounder
             if (!string.IsNullOrEmpty(newItem))
             {
                 var items = listBox_coms.Items.Cast<string>().ToList();
-                int insertIndex = listBox_coms.SelectedIndex >= 0 ? listBox_coms.SelectedIndex + 1 : items.Count;
+
+                // 選択されているアイテムのインデックスの最大値を取得
+                var selectedIndices = listBox_coms.SelectedIndices;
+                int lastSelectedIndex = selectedIndices.Count > 0 ? selectedIndices[selectedIndices.Count - 1] : -1;
+
+                // もし何も選択されていない、または最後のアイテムが選択されている場合は、リストの最後に追加
+                int insertIndex = (lastSelectedIndex >= 0 && lastSelectedIndex < items.Count - 1) ? lastSelectedIndex + 1 : items.Count;
+
+                // 新しいアイテムを挿入
                 items.Insert(insertIndex, newItem);
 
                 listBox_coms.DataSource = null; // リストボックスのデータソースを一時的にnullにする
                 listBox_coms.DataSource = items; // 更新したitemsリストをデータソースに設定
-                listBox_coms.SelectionMode = SelectionMode.One;
+                listBox_coms.ClearSelected(); // 既に選択されている項目の選択を解除
                 listBox_coms.SelectedIndex = insertIndex; // 追加した項目を選択状態にする
+
+                listBox_coms_DoubleClick(null, EventArgs.Empty);
             }
         }
+
 
         private bool isRemoveConfirmedOnce = false;
         private void comsList_remove_Click(object sender, EventArgs e)
@@ -941,23 +988,40 @@ namespace Playsounder
 
             if (!isRemoveConfirmedOnce)
             {
-                DialogResult result = MessageBox.Show("Do you want to remove the selected item?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Do you want to remove the selected items?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.No) return;
                 isRemoveConfirmedOnce = true;
             }
 
-            int selectedIndex = listBox_coms.SelectedIndex;
-            var items = listBox_coms.Items.Cast<string>().ToList();
+            var selectedIndices = listBox_coms.SelectedIndices.Cast<int>().OrderBy(i => i).ToList(); // 選択されているインデックスを昇順で取得
+            var items = listBox_coms.Items.Cast<string>().ToList(); // 現在の全アイテムのリスト
 
-            if (selectedIndex < 0 || selectedIndex >= items.Count) return;
-            items.RemoveAt(selectedIndex);
+            // 最初に削除される要素のインデックスを記録します。
+            int firstIndexRemoved = selectedIndices.First(); // 最初に削除される要素（最もインデックス番号が小さい）
 
-            listBox_coms.DataSource = null;
-            listBox_coms.DataSource = items;
+            // 選択されたアイテムを削除します。
+            foreach (var index in selectedIndices.OrderByDescending(i => i)) // 削除はインデックスの大きい順に行う
+            {
+                if (index < items.Count)
+                {
+                    items.RemoveAt(index); // アイテムを削除
+                }
+            }
+            // 選択インデックス更新
+            int newIndex = (items.Any() && firstIndexRemoved > 0) ? firstIndexRemoved - 1 : -1;
 
-            listBox_coms.SelectedIndex = selectedIndex > 0 ? selectedIndex - 1 : (items.Count > 0 ? 0 : -1);
+            listBox_coms.DataSource = null; // リストボックスのデータソースを一時的にnullにする
+            listBox_coms.DataSource = items; // 更新したitemsリストをデータソースに設定
+            listBox_coms.ClearSelected(); // 既に選択されている項目の選択を解除
+            listBox_coms.SelectedIndex = newIndex;
         }
+
+
+
+
+
+
 
         private void comsList_save_Click(object sender, EventArgs e)
         {
@@ -1009,15 +1073,15 @@ namespace Playsounder
             }
         }
 
-        //comPara_vol_barで0.0～1.0の範囲の値を取得し、comPara_volに反映
-        //comPara_volで0.0～1.0の範囲の値を取得し、comPara_vol_barに反映、0以下の場合は0.0に、1以上の場合は1.0にクリップ
         private void comPara_vol_bar_Scroll(object sender, EventArgs e)
         {
-            comPara_vol.Text = (comPara_vol_bar.Value * 0.1).ToString("F2", CultureInfo.InvariantCulture).TrimEnd('0').TrimEnd('.');
+            comPara_vol.Text = (comPara_vol_bar.Value * 0.1).ToString("F1", System.Globalization.CultureInfo.InvariantCulture);
         }
+
         private void comPara_vol_TextChanged(object sender, EventArgs e)
         {
-            if (float.TryParse(comPara_vol.Text, out float enteredVolume))
+            // TryParseにInvariantCultureを適用
+            if (float.TryParse(comPara_vol.Text, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out float enteredVolume))
             {
                 // enteredVolumeの値を0.0と1.0の間にクリップ
                 enteredVolume = Math.Max(0.0f, Math.Min(1.0f, enteredVolume));
@@ -1028,17 +1092,19 @@ namespace Playsounder
                 // comPara_vol_barのValueを更新
                 comPara_vol_bar.Value = newValue;
             }
-            PlayButton_Click(sender, e);
-            UpdateCommand();
+            PlayButton_Click(null, EventArgs.Empty);
         }
-        //comPara_volmin_barやcomPara_volminでも同様の処理を行う
+
+        // comPara_volminに対しても同様の処理
         private void comPara_volmin_bar_Scroll(object sender, EventArgs e)
         {
-            comPara_volmin.Text = (comPara_volmin_bar.Value * 0.1).ToString("F2", CultureInfo.InvariantCulture).TrimEnd('0').TrimEnd('.');
+            comPara_volmin.Text = (comPara_volmin_bar.Value * 0.1).ToString("F1", System.Globalization.CultureInfo.InvariantCulture);
         }
+
         private void comPara_volmin_TextChanged(object sender, EventArgs e)
         {
-            if (float.TryParse(comPara_volmin.Text, out float enteredVolume))
+            // TryParseにInvariantCultureを適用
+            if (float.TryParse(comPara_volmin.Text, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out float enteredVolume))
             {
                 // enteredVolumeの値を0.0と1.0の間にクリップ
                 enteredVolume = Math.Max(0.0f, Math.Min(1.0f, enteredVolume));
@@ -1049,11 +1115,106 @@ namespace Playsounder
                 // comPara_volmin_barのValueを更新
                 comPara_volmin_bar.Value = newValue;
             }
-            PlayButton_Click(sender, e);
-            UpdateCommand();
+            PlayButton_Click(null, EventArgs.Empty);
         }
 
 
+        //プログラム終了時にサウンドを停止
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DisposeSoundResources();
+        }
 
+        private void listBox_coms_MouseUp(object sender, MouseEventArgs e)
+        {
+            listBox_coms.SelectionMode = SelectionMode.MultiExtended;
+            //同時再生ボタンが非表示で、listBox_comsを複数選択時
+            if (!checkBoxPanel.Visible && 1 < listBox_coms.SelectedItems.Count)
+            {
+                //同時再生ボタンを表示
+                checkBoxPanel.Visible = true;
+                //playCheckboxParameterのチェックを外し、playCheckboxSelectedのチェックを入れる
+                playCheckboxParameter.Checked = false;
+                playCheckboxSelected.Checked = true;
+            }
+        }
+
+        private void comsList_rewrite_Click(object sender, EventArgs e)
+        {
+            //選択中の項目を、現在のコマンドに置き換える
+            if (listBox_coms.SelectedItem != null)
+            {
+                string newItem = CommandText.Text.Trim();
+                if (!string.IsNullOrEmpty(newItem))
+                {
+                    var items = listBox_coms.Items.Cast<string>().ToList();
+                    int selectedIndex = listBox_coms.SelectedIndex;
+                    //listBox_coms.SelectedIndicesを一時的に保存
+                    var selectedIndices = listBox_coms.SelectedIndices.Cast<int>().ToList();
+                    //複数選択時、選択中の項目を、現在のコマンドに置き換える
+                    foreach (int index in selectedIndices)
+                    {
+                        items[index] = newItem;
+                    }
+                    listBox_coms.DataSource = items; // 更新したitemsリストをデータソースに設定
+                    //一時的にセレクトを解除
+                    listBox_coms.SelectedIndex = -1;
+                    //selectedIndicesを復元
+                    foreach (int index in selectedIndices)
+                    {
+                        listBox_coms.SetSelected(index, true);
+                    }
+
+                }
+                listBox_coms_DoubleClick(null, EventArgs.Empty);
+            }
+        }
+
+        private void listBox_coms_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBox_coms.SelectedItem != null)
+            {
+                string selectedText = listBox_coms.SelectedItem.ToString();
+
+                if (selectedText.Contains("playsound"))
+                {
+                    int index = selectedText.IndexOf("playsound") + "playsound".Length;
+                    string playsoundFollowing = selectedText.Substring(index).Trim();
+
+                    List<string> words = playsoundFollowing.Split(' ').ToList();
+
+                    // 9つの単語がある場合のみ処理を進める
+                    if (words.Count == 9)
+                    {
+                        _selectedFullPath = words[0].StartsWith("minecraft:") ? words[0].Substring("minecraft:".Length) : words[0];
+                        List<string> fullPathList = _selectedFullPath.Split('.').ToList();
+                        if (fullPathList == null || !fullPathList.Any()) return;
+
+                        for (int i = 0; i < fullPathList.Count; i++)
+                        {
+                            Control control = this.Controls.Find("listBox" + (i + 1), true).FirstOrDefault();
+                            if (control is ListBox listBox)
+                            {
+                                int selectedIndex = listBox.FindString(fullPathList[i]);
+                                if (selectedIndex != -1)
+                                {
+                                    listBox.SelectedIndex = selectedIndex;
+                                    listBox_SelectedIndexChanged(listBox, EventArgs.Empty);
+                                }
+                            }
+                        }
+
+                        comPara_source.Text = words[1];
+                        comPara_selector.Text = words[2];
+                        comPara_posx.Text = words[3];
+                        comPara_posy.Text = words[4];
+                        comPara_posz.Text = words[5];
+                        comPara_vol.Text = words[6];
+                        PitchText.Text = words[7];
+                        comPara_volmin.Text = words[8];
+                    }
+                }
+            }
+        }
     }
 }

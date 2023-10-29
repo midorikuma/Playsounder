@@ -51,14 +51,18 @@
             CopyButton = new System.Windows.Forms.Button();
             MuteButton = new System.Windows.Forms.CheckBox();
             pathPanel = new System.Windows.Forms.TableLayoutPanel();
-            button1 = new System.Windows.Forms.Button();
             listBox1 = new System.Windows.Forms.ListBox();
             label6 = new System.Windows.Forms.Label();
             listBox6 = new System.Windows.Forms.ListBox();
+            button1 = new System.Windows.Forms.Button();
             comBottomPanel1 = new System.Windows.Forms.TableLayoutPanel();
             comboBox2 = new System.Windows.Forms.ComboBox();
             PlayButton = new System.Windows.Forms.Button();
             comBottomPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            checkBoxPanel = new System.Windows.Forms.TableLayoutPanel();
+            playCheckboxParameter = new System.Windows.Forms.CheckBox();
+            playCheckboxNotSelected = new System.Windows.Forms.CheckBox();
+            playCheckboxSelected = new System.Windows.Forms.CheckBox();
             comPanel = new System.Windows.Forms.TableLayoutPanel();
             comUpPanel = new System.Windows.Forms.TableLayoutPanel();
             comParasPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -66,6 +70,7 @@
             comPara_volmin = new System.Windows.Forms.TextBox();
             comPara_volmin_bar = new System.Windows.Forms.TrackBar();
             comFilePanel = new System.Windows.Forms.TableLayoutPanel();
+            comsList_save = new System.Windows.Forms.Button();
             comPara_selectedFile = new System.Windows.Forms.TextBox();
             button_selectFile = new System.Windows.Forms.Button();
             comPara_source = new System.Windows.Forms.ComboBox();
@@ -77,13 +82,13 @@
             comVolPanel = new System.Windows.Forms.TableLayoutPanel();
             comPara_vol = new System.Windows.Forms.TextBox();
             comPara_vol_bar = new System.Windows.Forms.TrackBar();
-            listBox_coms = new System.Windows.Forms.ListBox();
             comSavePanel = new System.Windows.Forms.TableLayoutPanel();
-            comsList_save = new System.Windows.Forms.Button();
             comsList_moveUp = new System.Windows.Forms.Button();
-            comsList_add = new System.Windows.Forms.Button();
-            comsList_remove = new System.Windows.Forms.Button();
             comsList_moveDown = new System.Windows.Forms.Button();
+            comsList_remove = new System.Windows.Forms.Button();
+            comsList_add = new System.Windows.Forms.Button();
+            comsList_rewrite = new System.Windows.Forms.Button();
+            listBox_coms = new System.Windows.Forms.ListBox();
             comBottomPanel = new System.Windows.Forms.TableLayoutPanel();
             saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)PitchBar).BeginInit();
@@ -91,6 +96,7 @@
             pathPanel.SuspendLayout();
             comBottomPanel1.SuspendLayout();
             comBottomPanel2.SuspendLayout();
+            checkBoxPanel.SuspendLayout();
             comPanel.SuspendLayout();
             comUpPanel.SuspendLayout();
             comParasPanel.SuspendLayout();
@@ -106,7 +112,6 @@
             // 
             // openFileDialog1
             // 
-            openFileDialog1.AutoUpgradeEnabled = false;
             openFileDialog1.DefaultExt = "mcfunction";
             openFileDialog1.Filter = "mcfunction Files (*.mcfunction)|*.mcfunction|All Files (*.*)|*.*";
             openFileDialog1.ReadOnlyChecked = true;
@@ -144,7 +149,7 @@
             listBox2.Location = new System.Drawing.Point(121, 48);
             listBox2.Margin = new System.Windows.Forms.Padding(4);
             listBox2.Name = "listBox2";
-            listBox2.Size = new System.Drawing.Size(109, 184);
+            listBox2.Size = new System.Drawing.Size(109, 169);
             listBox2.TabIndex = 3;
             listBox2.Visible = false;
             listBox2.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
@@ -167,7 +172,7 @@
             listBox3.Location = new System.Drawing.Point(238, 48);
             listBox3.Margin = new System.Windows.Forms.Padding(4);
             listBox3.Name = "listBox3";
-            listBox3.Size = new System.Drawing.Size(109, 184);
+            listBox3.Size = new System.Drawing.Size(109, 169);
             listBox3.TabIndex = 5;
             listBox3.Visible = false;
             listBox3.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
@@ -181,7 +186,7 @@
             listBox4.Location = new System.Drawing.Point(355, 48);
             listBox4.Margin = new System.Windows.Forms.Padding(4);
             listBox4.Name = "listBox4";
-            listBox4.Size = new System.Drawing.Size(109, 184);
+            listBox4.Size = new System.Drawing.Size(109, 169);
             listBox4.TabIndex = 6;
             listBox4.Visible = false;
             listBox4.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
@@ -213,7 +218,7 @@
             listBox5.Location = new System.Drawing.Point(472, 48);
             listBox5.Margin = new System.Windows.Forms.Padding(4);
             listBox5.Name = "listBox5";
-            listBox5.Size = new System.Drawing.Size(109, 184);
+            listBox5.Size = new System.Drawing.Size(109, 169);
             listBox5.TabIndex = 9;
             listBox5.Visible = false;
             listBox5.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
@@ -234,7 +239,7 @@
             Pitch0Button.Location = new System.Drawing.Point(4, 6);
             Pitch0Button.Margin = new System.Windows.Forms.Padding(4, 6, 4, 2);
             Pitch0Button.Name = "Pitch0Button";
-            Pitch0Button.Size = new System.Drawing.Size(31, 22);
+            Pitch0Button.Size = new System.Drawing.Size(31, 24);
             Pitch0Button.TabIndex = 12;
             Pitch0Button.Text = "0.5";
             Pitch0Button.UseVisualStyleBackColor = true;
@@ -248,7 +253,7 @@
             PitchBar.Maximum = 100;
             PitchBar.Minimum = -100;
             PitchBar.Name = "PitchBar";
-            PitchBar.Size = new System.Drawing.Size(210, 26);
+            PitchBar.Size = new System.Drawing.Size(210, 27);
             PitchBar.TabIndex = 13;
             PitchBar.TickFrequency = 10;
             PitchBar.Scroll += PitchBar_Scroll;
@@ -260,7 +265,7 @@
             Pitch1Button.Location = new System.Drawing.Point(89, 6);
             Pitch1Button.Margin = new System.Windows.Forms.Padding(4, 6, 4, 2);
             Pitch1Button.Name = "Pitch1Button";
-            Pitch1Button.Size = new System.Drawing.Size(31, 22);
+            Pitch1Button.Size = new System.Drawing.Size(31, 24);
             Pitch1Button.TabIndex = 14;
             Pitch1Button.Text = "1.0";
             Pitch1Button.UseVisualStyleBackColor = true;
@@ -273,7 +278,7 @@
             Pitch2Button.Location = new System.Drawing.Point(175, 6);
             Pitch2Button.Margin = new System.Windows.Forms.Padding(4, 6, 4, 2);
             Pitch2Button.Name = "Pitch2Button";
-            Pitch2Button.Size = new System.Drawing.Size(31, 22);
+            Pitch2Button.Size = new System.Drawing.Size(31, 24);
             Pitch2Button.TabIndex = 15;
             Pitch2Button.Text = "2.0";
             Pitch2Button.UseVisualStyleBackColor = true;
@@ -285,7 +290,7 @@
             PitchText.Location = new System.Drawing.Point(214, 4);
             PitchText.Margin = new System.Windows.Forms.Padding(4);
             PitchText.Name = "PitchText";
-            PitchText.Size = new System.Drawing.Size(50, 23);
+            PitchText.Size = new System.Drawing.Size(57, 23);
             PitchText.TabIndex = 16;
             PitchText.Text = "1.0";
             PitchText.TextChanged += PitchText_TextChanged;
@@ -294,10 +299,10 @@
             // 
             StopButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             StopButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            StopButton.Location = new System.Drawing.Point(243, 2);
+            StopButton.Location = new System.Drawing.Point(244, 2);
             StopButton.Margin = new System.Windows.Forms.Padding(2);
             StopButton.Name = "StopButton";
-            StopButton.Size = new System.Drawing.Size(27, 26);
+            StopButton.Size = new System.Drawing.Size(28, 28);
             StopButton.TabIndex = 18;
             StopButton.Text = "⬛";
             StopButton.UseVisualStyleBackColor = true;
@@ -306,12 +311,12 @@
             // VolumeBar
             // 
             VolumeBar.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            VolumeBar.Location = new System.Drawing.Point(303, 5);
-            VolumeBar.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            VolumeBar.Location = new System.Drawing.Point(306, 6);
+            VolumeBar.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             VolumeBar.Maximum = 100;
             VolumeBar.Minimum = -100;
             VolumeBar.Name = "VolumeBar";
-            VolumeBar.Size = new System.Drawing.Size(76, 25);
+            VolumeBar.Size = new System.Drawing.Size(75, 26);
             VolumeBar.TabIndex = 19;
             VolumeBar.TickFrequency = 0;
             VolumeBar.TickStyle = System.Windows.Forms.TickStyle.None;
@@ -320,20 +325,20 @@
             // CommandText
             // 
             CommandText.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            CommandText.Location = new System.Drawing.Point(369, 4);
+            CommandText.Location = new System.Drawing.Point(379, 4);
             CommandText.Margin = new System.Windows.Forms.Padding(4);
             CommandText.Name = "CommandText";
             CommandText.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            CommandText.Size = new System.Drawing.Size(375, 23);
+            CommandText.Size = new System.Drawing.Size(365, 23);
             CommandText.TabIndex = 20;
             // 
             // CopyButton
             // 
             CopyButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            CopyButton.Location = new System.Drawing.Point(699, 2);
+            CopyButton.Location = new System.Drawing.Point(684, 2);
             CopyButton.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             CopyButton.Name = "CopyButton";
-            CopyButton.Size = new System.Drawing.Size(45, 26);
+            CopyButton.Size = new System.Drawing.Size(60, 28);
             CopyButton.TabIndex = 21;
             CopyButton.Text = "Copy";
             CopyButton.UseVisualStyleBackColor = true;
@@ -345,10 +350,10 @@
             MuteButton.Appearance = System.Windows.Forms.Appearance.Button;
             MuteButton.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             MuteButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            MuteButton.Location = new System.Drawing.Point(274, 2);
+            MuteButton.Location = new System.Drawing.Point(276, 2);
             MuteButton.Margin = new System.Windows.Forms.Padding(2);
             MuteButton.Name = "MuteButton";
-            MuteButton.Size = new System.Drawing.Size(27, 26);
+            MuteButton.Size = new System.Drawing.Size(28, 28);
             MuteButton.TabIndex = 22;
             MuteButton.Text = "🔊";
             MuteButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -367,7 +372,6 @@
             pathPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
             pathPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             pathPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
-            pathPanel.Controls.Add(button1, 0, 2);
             pathPanel.Controls.Add(listBox3, 2, 1);
             pathPanel.Controls.Add(listBox4, 3, 1);
             pathPanel.Controls.Add(listBox5, 4, 1);
@@ -380,6 +384,7 @@
             pathPanel.Controls.Add(label3, 2, 0);
             pathPanel.Controls.Add(label6, 6, 0);
             pathPanel.Controls.Add(listBox6, 6, 1);
+            pathPanel.Controls.Add(button1, 0, 2);
             pathPanel.Location = new System.Drawing.Point(-1, -3);
             pathPanel.Margin = new System.Windows.Forms.Padding(4);
             pathPanel.Name = "pathPanel";
@@ -387,28 +392,8 @@
             pathPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             pathPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             pathPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
-            pathPanel.Size = new System.Drawing.Size(752, 251);
+            pathPanel.Size = new System.Drawing.Size(752, 240);
             pathPanel.TabIndex = 23;
-            // 
-            // button1
-            // 
-            button1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            button1.BackColor = System.Drawing.SystemColors.HighlightText;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button1.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            button1.ForeColor = System.Drawing.SystemColors.Window;
-            button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button1.Location = new System.Drawing.Point(0, 236);
-            button1.Margin = new System.Windows.Forms.Padding(0);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(30, 15);
-            button1.TabIndex = 13;
-            button1.Text = " ";
-            button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
-            button1.Paint += button1_Paint;
             // 
             // listBox1
             // 
@@ -418,7 +403,7 @@
             listBox1.Location = new System.Drawing.Point(4, 48);
             listBox1.Margin = new System.Windows.Forms.Padding(4);
             listBox1.Name = "listBox1";
-            listBox1.Size = new System.Drawing.Size(109, 184);
+            listBox1.Size = new System.Drawing.Size(109, 169);
             listBox1.TabIndex = 2;
             listBox1.Visible = false;
             listBox1.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
@@ -432,7 +417,7 @@
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(109, 29);
             label6.TabIndex = 12;
-            label6.Text = "ogg files";
+            label6.Text = ".ogg";
             label6.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             label6.Visible = false;
             // 
@@ -444,11 +429,30 @@
             listBox6.Location = new System.Drawing.Point(639, 48);
             listBox6.Margin = new System.Windows.Forms.Padding(4);
             listBox6.Name = "listBox6";
-            listBox6.Size = new System.Drawing.Size(109, 184);
+            listBox6.Size = new System.Drawing.Size(109, 169);
             listBox6.TabIndex = 11;
             listBox6.Visible = false;
             listBox6.VisibleChanged += AdjustColumnWidthBasedOnListBoxContent;
             listBox6.MouseUp += listBox_SelectedIndexChanged;
+            // 
+            // button1
+            // 
+            button1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            button1.BackColor = System.Drawing.SystemColors.HighlightText;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button1.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            button1.ForeColor = System.Drawing.SystemColors.Window;
+            button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            button1.Location = new System.Drawing.Point(0, 225);
+            button1.Margin = new System.Windows.Forms.Padding(0);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(30, 15);
+            button1.TabIndex = 13;
+            button1.Text = " ";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            button1.Paint += button1_Paint;
             // 
             // comBottomPanel1
             // 
@@ -456,9 +460,9 @@
             comBottomPanel1.BackColor = System.Drawing.SystemColors.InactiveBorder;
             comBottomPanel1.ColumnCount = 4;
             comBottomPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
-            comBottomPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.94092F));
-            comBottomPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.16193F));
-            comBottomPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.11597F));
+            comBottomPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            comBottomPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            comBottomPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             comBottomPanel1.Controls.Add(PitchBar, 0, 0);
             comBottomPanel1.Controls.Add(PitchText, 1, 0);
             comBottomPanel1.Controls.Add(comboBox2, 2, 0);
@@ -468,7 +472,7 @@
             comBottomPanel1.Name = "comBottomPanel1";
             comBottomPanel1.RowCount = 1;
             comBottomPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            comBottomPanel1.Size = new System.Drawing.Size(748, 30);
+            comBottomPanel1.Size = new System.Drawing.Size(748, 31);
             comBottomPanel1.TabIndex = 12;
             // 
             // comboBox2
@@ -476,10 +480,10 @@
             comboBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBox2.Items.AddRange(new object[] { "Command", "Path" });
-            comboBox2.Location = new System.Drawing.Point(272, 4);
+            comboBox2.Location = new System.Drawing.Point(279, 4);
             comboBox2.Margin = new System.Windows.Forms.Padding(4);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new System.Drawing.Size(89, 23);
+            comboBox2.Size = new System.Drawing.Size(92, 23);
             comboBox2.TabIndex = 21;
             comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
@@ -487,11 +491,11 @@
             // 
             PlayButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             PlayButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            PlayButton.Location = new System.Drawing.Point(214, 2);
-            PlayButton.Margin = new System.Windows.Forms.Padding(4, 2, 2, 2);
+            PlayButton.Location = new System.Drawing.Point(212, 2);
+            PlayButton.Margin = new System.Windows.Forms.Padding(2);
             PlayButton.Name = "PlayButton";
             PlayButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            PlayButton.Size = new System.Drawing.Size(25, 26);
+            PlayButton.Size = new System.Drawing.Size(28, 28);
             PlayButton.TabIndex = 17;
             PlayButton.Text = "▶";
             PlayButton.UseVisualStyleBackColor = true;
@@ -501,30 +505,90 @@
             // 
             comBottomPanel2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             comBottomPanel2.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            comBottomPanel2.ColumnCount = 8;
+            comBottomPanel2.ColumnCount = 10;
             comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
             comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 369F));
+            comBottomPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
             comBottomPanel2.Controls.Add(Pitch1Button, 1, 0);
             comBottomPanel2.Controls.Add(Pitch2Button, 2, 0);
             comBottomPanel2.Controls.Add(StopButton, 4, 0);
             comBottomPanel2.Controls.Add(PlayButton, 3, 0);
-            comBottomPanel2.Controls.Add(CopyButton, 7, 0);
             comBottomPanel2.Controls.Add(VolumeBar, 6, 0);
             comBottomPanel2.Controls.Add(MuteButton, 5, 0);
             comBottomPanel2.Controls.Add(Pitch0Button, 0, 0);
-            comBottomPanel2.Location = new System.Drawing.Point(0, 30);
+            comBottomPanel2.Controls.Add(CopyButton, 9, 0);
+            comBottomPanel2.Controls.Add(checkBoxPanel, 7, 0);
+            comBottomPanel2.Location = new System.Drawing.Point(0, 31);
             comBottomPanel2.Margin = new System.Windows.Forms.Padding(0);
             comBottomPanel2.Name = "comBottomPanel2";
             comBottomPanel2.RowCount = 1;
             comBottomPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            comBottomPanel2.Size = new System.Drawing.Size(748, 30);
+            comBottomPanel2.Size = new System.Drawing.Size(748, 32);
             comBottomPanel2.TabIndex = 25;
+            // 
+            // checkBoxPanel
+            // 
+            checkBoxPanel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            checkBoxPanel.ColumnCount = 2;
+            checkBoxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            checkBoxPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            checkBoxPanel.Controls.Add(playCheckboxParameter, 0, 0);
+            checkBoxPanel.Controls.Add(playCheckboxNotSelected, 1, 0);
+            checkBoxPanel.Controls.Add(playCheckboxSelected, 0, 1);
+            checkBoxPanel.Location = new System.Drawing.Point(381, 0);
+            checkBoxPanel.Margin = new System.Windows.Forms.Padding(0);
+            checkBoxPanel.Name = "checkBoxPanel";
+            checkBoxPanel.RowCount = 2;
+            checkBoxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            checkBoxPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            checkBoxPanel.Size = new System.Drawing.Size(180, 32);
+            checkBoxPanel.TabIndex = 23;
+            // 
+            // playCheckboxParameter
+            // 
+            playCheckboxParameter.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            playCheckboxParameter.AutoSize = true;
+            playCheckboxParameter.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            playCheckboxParameter.Location = new System.Drawing.Point(0, 0);
+            playCheckboxParameter.Margin = new System.Windows.Forms.Padding(0);
+            playCheckboxParameter.Name = "playCheckboxParameter";
+            playCheckboxParameter.Size = new System.Drawing.Size(90, 16);
+            playCheckboxParameter.TabIndex = 2;
+            playCheckboxParameter.Text = "Parameter";
+            playCheckboxParameter.UseVisualStyleBackColor = true;
+            // 
+            // playCheckboxNotSelected
+            // 
+            playCheckboxNotSelected.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            playCheckboxNotSelected.AutoSize = true;
+            playCheckboxNotSelected.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            playCheckboxNotSelected.Location = new System.Drawing.Point(90, 0);
+            playCheckboxNotSelected.Margin = new System.Windows.Forms.Padding(0);
+            playCheckboxNotSelected.Name = "playCheckboxNotSelected";
+            playCheckboxNotSelected.Size = new System.Drawing.Size(90, 16);
+            playCheckboxNotSelected.TabIndex = 1;
+            playCheckboxNotSelected.Text = "NotSelected";
+            playCheckboxNotSelected.UseVisualStyleBackColor = true;
+            // 
+            // playCheckboxSelected
+            // 
+            playCheckboxSelected.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            playCheckboxSelected.AutoSize = true;
+            playCheckboxSelected.Font = new System.Drawing.Font("Yu Gothic UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            playCheckboxSelected.Location = new System.Drawing.Point(0, 16);
+            playCheckboxSelected.Margin = new System.Windows.Forms.Padding(0);
+            playCheckboxSelected.Name = "playCheckboxSelected";
+            playCheckboxSelected.Size = new System.Drawing.Size(90, 16);
+            playCheckboxSelected.TabIndex = 0;
+            playCheckboxSelected.Text = "Selected";
+            playCheckboxSelected.UseVisualStyleBackColor = true;
             // 
             // comPanel
             // 
@@ -535,13 +599,13 @@
             comPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             comPanel.Controls.Add(comUpPanel, 0, 0);
             comPanel.Controls.Add(comBottomPanel, 0, 1);
-            comPanel.Location = new System.Drawing.Point(-1, 248);
+            comPanel.Location = new System.Drawing.Point(-1, 245);
             comPanel.Margin = new System.Windows.Forms.Padding(4);
             comPanel.Name = "comPanel";
             comPanel.RowCount = 2;
             comPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            comPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
-            comPanel.Size = new System.Drawing.Size(753, 233);
+            comPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69F));
+            comPanel.Size = new System.Drawing.Size(753, 251);
             comPanel.TabIndex = 24;
             // 
             // comUpPanel
@@ -552,13 +616,14 @@
             comUpPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.3575439F));
             comUpPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             comUpPanel.Controls.Add(comParasPanel, 0, 0);
-            comUpPanel.Controls.Add(listBox_coms, 1, 0);
             comUpPanel.Controls.Add(comSavePanel, 2, 0);
+            comUpPanel.Controls.Add(listBox_coms, 1, 0);
             comUpPanel.Location = new System.Drawing.Point(4, 4);
             comUpPanel.Name = "comUpPanel";
             comUpPanel.RowCount = 1;
             comUpPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            comUpPanel.Size = new System.Drawing.Size(757, 158);
+            comUpPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            comUpPanel.Size = new System.Drawing.Size(757, 173);
             comUpPanel.TabIndex = 1;
             // 
             // comParasPanel
@@ -582,7 +647,7 @@
             comParasPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66222F));
             comParasPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66222F));
             comParasPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            comParasPanel.Size = new System.Drawing.Size(106, 152);
+            comParasPanel.Size = new System.Drawing.Size(106, 167);
             comParasPanel.TabIndex = 1;
             // 
             // comVolminPanel
@@ -593,12 +658,12 @@
             comVolminPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             comVolminPanel.Controls.Add(comPara_volmin, 0, 0);
             comVolminPanel.Controls.Add(comPara_volmin_bar, 1, 0);
-            comVolminPanel.Location = new System.Drawing.Point(0, 125);
+            comVolminPanel.Location = new System.Drawing.Point(0, 135);
             comVolminPanel.Margin = new System.Windows.Forms.Padding(0);
             comVolminPanel.Name = "comVolminPanel";
             comVolminPanel.RowCount = 1;
             comVolminPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            comVolminPanel.Size = new System.Drawing.Size(106, 25);
+            comVolminPanel.Size = new System.Drawing.Size(106, 27);
             comVolminPanel.TabIndex = 5;
             // 
             // comPara_volmin
@@ -618,16 +683,18 @@
             comPara_volmin_bar.Location = new System.Drawing.Point(31, 0);
             comPara_volmin_bar.Margin = new System.Windows.Forms.Padding(0);
             comPara_volmin_bar.Name = "comPara_volmin_bar";
-            comPara_volmin_bar.Size = new System.Drawing.Size(75, 25);
+            comPara_volmin_bar.Size = new System.Drawing.Size(75, 27);
             comPara_volmin_bar.TabIndex = 1;
             comPara_volmin_bar.Scroll += comPara_volmin_bar_Scroll;
             // 
             // comFilePanel
             // 
             comFilePanel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            comFilePanel.ColumnCount = 2;
+            comFilePanel.ColumnCount = 3;
             comFilePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             comFilePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            comFilePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            comFilePanel.Controls.Add(comsList_save, 2, 0);
             comFilePanel.Controls.Add(comPara_selectedFile, 0, 0);
             comFilePanel.Controls.Add(button_selectFile, 1, 0);
             comFilePanel.Location = new System.Drawing.Point(0, 0);
@@ -635,8 +702,21 @@
             comFilePanel.Name = "comFilePanel";
             comFilePanel.RowCount = 1;
             comFilePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            comFilePanel.Size = new System.Drawing.Size(106, 25);
+            comFilePanel.Size = new System.Drawing.Size(106, 27);
             comFilePanel.TabIndex = 0;
+            // 
+            // comsList_save
+            // 
+            comsList_save.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comsList_save.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            comsList_save.Location = new System.Drawing.Point(82, 1);
+            comsList_save.Margin = new System.Windows.Forms.Padding(1);
+            comsList_save.Name = "comsList_save";
+            comsList_save.Size = new System.Drawing.Size(23, 25);
+            comsList_save.TabIndex = 2;
+            comsList_save.Text = "💾";
+            comsList_save.UseVisualStyleBackColor = true;
+            comsList_save.Click += comsList_save_Click;
             // 
             // comPara_selectedFile
             // 
@@ -644,15 +724,16 @@
             comPara_selectedFile.Location = new System.Drawing.Point(1, 1);
             comPara_selectedFile.Margin = new System.Windows.Forms.Padding(1);
             comPara_selectedFile.Name = "comPara_selectedFile";
-            comPara_selectedFile.Size = new System.Drawing.Size(78, 23);
+            comPara_selectedFile.Size = new System.Drawing.Size(53, 23);
             comPara_selectedFile.TabIndex = 0;
             // 
             // button_selectFile
             // 
-            button_selectFile.Location = new System.Drawing.Point(81, 1);
-            button_selectFile.Margin = new System.Windows.Forms.Padding(1);
+            button_selectFile.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            button_selectFile.Location = new System.Drawing.Point(56, 6);
+            button_selectFile.Margin = new System.Windows.Forms.Padding(1, 6, 1, 1);
             button_selectFile.Name = "button_selectFile";
-            button_selectFile.Size = new System.Drawing.Size(24, 23);
+            button_selectFile.Size = new System.Drawing.Size(24, 20);
             button_selectFile.TabIndex = 1;
             button_selectFile.Text = "...";
             button_selectFile.UseVisualStyleBackColor = true;
@@ -662,7 +743,7 @@
             // 
             comPara_source.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             comPara_source.FormattingEnabled = true;
-            comPara_source.Location = new System.Drawing.Point(1, 26);
+            comPara_source.Location = new System.Drawing.Point(1, 28);
             comPara_source.Margin = new System.Windows.Forms.Padding(1);
             comPara_source.Name = "comPara_source";
             comPara_source.Size = new System.Drawing.Size(104, 23);
@@ -672,7 +753,7 @@
             // comPara_selector
             // 
             comPara_selector.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            comPara_selector.Location = new System.Drawing.Point(1, 51);
+            comPara_selector.Location = new System.Drawing.Point(1, 55);
             comPara_selector.Margin = new System.Windows.Forms.Padding(1);
             comPara_selector.Name = "comPara_selector";
             comPara_selector.Size = new System.Drawing.Size(104, 23);
@@ -689,12 +770,12 @@
             comPosPanel.Controls.Add(comPara_posx, 0, 0);
             comPosPanel.Controls.Add(comPara_posy, 1, 0);
             comPosPanel.Controls.Add(comPara_posz, 2, 0);
-            comPosPanel.Location = new System.Drawing.Point(0, 75);
+            comPosPanel.Location = new System.Drawing.Point(0, 81);
             comPosPanel.Margin = new System.Windows.Forms.Padding(0);
             comPosPanel.Name = "comPosPanel";
             comPosPanel.RowCount = 1;
             comPosPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            comPosPanel.Size = new System.Drawing.Size(106, 25);
+            comPosPanel.Size = new System.Drawing.Size(106, 27);
             comPosPanel.TabIndex = 3;
             // 
             // comPara_posx
@@ -735,12 +816,12 @@
             comVolPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             comVolPanel.Controls.Add(comPara_vol, 0, 0);
             comVolPanel.Controls.Add(comPara_vol_bar, 1, 0);
-            comVolPanel.Location = new System.Drawing.Point(0, 100);
+            comVolPanel.Location = new System.Drawing.Point(0, 108);
             comVolPanel.Margin = new System.Windows.Forms.Padding(0);
             comVolPanel.Name = "comVolPanel";
             comVolPanel.RowCount = 1;
             comVolPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            comVolPanel.Size = new System.Drawing.Size(106, 25);
+            comVolPanel.Size = new System.Drawing.Size(106, 27);
             comVolPanel.TabIndex = 4;
             // 
             // comPara_vol
@@ -759,37 +840,21 @@
             comPara_vol_bar.Location = new System.Drawing.Point(31, 0);
             comPara_vol_bar.Margin = new System.Windows.Forms.Padding(0);
             comPara_vol_bar.Name = "comPara_vol_bar";
-            comPara_vol_bar.Size = new System.Drawing.Size(75, 25);
+            comPara_vol_bar.Size = new System.Drawing.Size(75, 27);
             comPara_vol_bar.TabIndex = 1;
             comPara_vol_bar.Value = 10;
             comPara_vol_bar.Scroll += comPara_vol_bar_Scroll;
-            // 
-            // listBox_coms
-            // 
-            listBox_coms.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            listBox_coms.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            listBox_coms.FormattingEnabled = true;
-            listBox_coms.ItemHeight = 15;
-            listBox_coms.Location = new System.Drawing.Point(114, 2);
-            listBox_coms.Margin = new System.Windows.Forms.Padding(2);
-            listBox_coms.Name = "listBox_coms";
-            listBox_coms.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            listBox_coms.Size = new System.Drawing.Size(600, 154);
-            listBox_coms.TabIndex = 0;
-            listBox_coms.DrawItem += listBox_coms_DrawItem;
-            listBox_coms.SelectedIndexChanged += listBox_coms_SelectedIndexChanged;
-            listBox_coms.DataSourceChanged += listBox_coms_DataSourceChanged;
             // 
             // comSavePanel
             // 
             comSavePanel.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             comSavePanel.ColumnCount = 1;
             comSavePanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            comSavePanel.Controls.Add(comsList_save, 0, 0);
             comSavePanel.Controls.Add(comsList_moveUp, 0, 4);
-            comSavePanel.Controls.Add(comsList_add, 0, 1);
-            comSavePanel.Controls.Add(comsList_remove, 0, 2);
             comSavePanel.Controls.Add(comsList_moveDown, 0, 5);
+            comSavePanel.Controls.Add(comsList_remove, 0, 2);
+            comSavePanel.Controls.Add(comsList_add, 0, 1);
+            comSavePanel.Controls.Add(comsList_rewrite, 0, 0);
             comSavePanel.Location = new System.Drawing.Point(716, 0);
             comSavePanel.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             comSavePanel.Name = "comSavePanel";
@@ -801,26 +866,13 @@
             comSavePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             comSavePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             comSavePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            comSavePanel.Size = new System.Drawing.Size(31, 158);
+            comSavePanel.Size = new System.Drawing.Size(31, 173);
             comSavePanel.TabIndex = 2;
-            // 
-            // comsList_save
-            // 
-            comsList_save.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            comsList_save.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            comsList_save.Location = new System.Drawing.Point(2, 2);
-            comsList_save.Margin = new System.Windows.Forms.Padding(2);
-            comsList_save.Name = "comsList_save";
-            comsList_save.Size = new System.Drawing.Size(27, 26);
-            comsList_save.TabIndex = 2;
-            comsList_save.Text = "💾";
-            comsList_save.UseVisualStyleBackColor = true;
-            comsList_save.Click += comsList_save_Click;
             // 
             // comsList_moveUp
             // 
             comsList_moveUp.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            comsList_moveUp.Location = new System.Drawing.Point(2, 100);
+            comsList_moveUp.Location = new System.Drawing.Point(2, 115);
             comsList_moveUp.Margin = new System.Windows.Forms.Padding(2);
             comsList_moveUp.Name = "comsList_moveUp";
             comsList_moveUp.Size = new System.Drawing.Size(27, 26);
@@ -829,23 +881,22 @@
             comsList_moveUp.UseVisualStyleBackColor = true;
             comsList_moveUp.Click += comsList_moveUp_Click;
             // 
-            // comsList_add
+            // comsList_moveDown
             // 
-            comsList_add.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            comsList_add.Font = new System.Drawing.Font("Arial", 12.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            comsList_add.Location = new System.Drawing.Point(2, 32);
-            comsList_add.Margin = new System.Windows.Forms.Padding(2);
-            comsList_add.Name = "comsList_add";
-            comsList_add.Size = new System.Drawing.Size(27, 26);
-            comsList_add.TabIndex = 0;
-            comsList_add.Text = "+";
-            comsList_add.UseVisualStyleBackColor = true;
-            comsList_add.Click += comsList_add_Click;
+            comsList_moveDown.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comsList_moveDown.Location = new System.Drawing.Point(2, 145);
+            comsList_moveDown.Margin = new System.Windows.Forms.Padding(2);
+            comsList_moveDown.Name = "comsList_moveDown";
+            comsList_moveDown.Size = new System.Drawing.Size(27, 26);
+            comsList_moveDown.TabIndex = 4;
+            comsList_moveDown.Text = "▼";
+            comsList_moveDown.UseVisualStyleBackColor = true;
+            comsList_moveDown.Click += comsList_moveDown_Click;
             // 
             // comsList_remove
             // 
             comsList_remove.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            comsList_remove.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            comsList_remove.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             comsList_remove.Location = new System.Drawing.Point(2, 62);
             comsList_remove.Margin = new System.Windows.Forms.Padding(2);
             comsList_remove.Name = "comsList_remove";
@@ -855,17 +906,47 @@
             comsList_remove.UseVisualStyleBackColor = true;
             comsList_remove.Click += comsList_remove_Click;
             // 
-            // comsList_moveDown
+            // comsList_add
             // 
-            comsList_moveDown.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            comsList_moveDown.Location = new System.Drawing.Point(2, 130);
-            comsList_moveDown.Margin = new System.Windows.Forms.Padding(2);
-            comsList_moveDown.Name = "comsList_moveDown";
-            comsList_moveDown.Size = new System.Drawing.Size(27, 26);
-            comsList_moveDown.TabIndex = 4;
-            comsList_moveDown.Text = "▼";
-            comsList_moveDown.UseVisualStyleBackColor = true;
-            comsList_moveDown.Click += comsList_moveDown_Click;
+            comsList_add.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comsList_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            comsList_add.Location = new System.Drawing.Point(2, 32);
+            comsList_add.Margin = new System.Windows.Forms.Padding(2);
+            comsList_add.Name = "comsList_add";
+            comsList_add.Size = new System.Drawing.Size(27, 26);
+            comsList_add.TabIndex = 0;
+            comsList_add.Text = "➕";
+            comsList_add.UseVisualStyleBackColor = true;
+            comsList_add.Click += comsList_add_Click;
+            // 
+            // comsList_rewrite
+            // 
+            comsList_rewrite.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            comsList_rewrite.Location = new System.Drawing.Point(2, 2);
+            comsList_rewrite.Margin = new System.Windows.Forms.Padding(2);
+            comsList_rewrite.Name = "comsList_rewrite";
+            comsList_rewrite.Size = new System.Drawing.Size(27, 26);
+            comsList_rewrite.TabIndex = 5;
+            comsList_rewrite.Text = "◀";
+            comsList_rewrite.UseVisualStyleBackColor = true;
+            comsList_rewrite.Click += comsList_rewrite_Click;
+            // 
+            // listBox_coms
+            // 
+            listBox_coms.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            listBox_coms.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            listBox_coms.FormattingEnabled = true;
+            listBox_coms.ItemHeight = 15;
+            listBox_coms.Location = new System.Drawing.Point(114, 2);
+            listBox_coms.Margin = new System.Windows.Forms.Padding(2);
+            listBox_coms.Name = "listBox_coms";
+            listBox_coms.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            listBox_coms.Size = new System.Drawing.Size(600, 169);
+            listBox_coms.TabIndex = 0;
+            listBox_coms.DrawItem += listBox_coms_DrawItem;
+            listBox_coms.DataSourceChanged += listBox_coms_DataSourceChanged;
+            listBox_coms.DoubleClick += listBox_coms_DoubleClick;
+            listBox_coms.MouseUp += listBox_coms_MouseUp;
             // 
             // comBottomPanel
             // 
@@ -876,18 +957,17 @@
             comBottomPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             comBottomPanel.Controls.Add(comBottomPanel2, 0, 1);
             comBottomPanel.Controls.Add(comBottomPanel1, 0, 0);
-            comBottomPanel.Location = new System.Drawing.Point(4, 169);
+            comBottomPanel.Location = new System.Drawing.Point(4, 184);
             comBottomPanel.Margin = new System.Windows.Forms.Padding(3, 3, 12, 3);
             comBottomPanel.Name = "comBottomPanel";
             comBottomPanel.RowCount = 2;
             comBottomPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             comBottomPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            comBottomPanel.Size = new System.Drawing.Size(748, 60);
+            comBottomPanel.Size = new System.Drawing.Size(748, 63);
             comBottomPanel.TabIndex = 0;
             // 
             // saveFileDialog1
             // 
-            saveFileDialog1.AutoUpgradeEnabled = false;
             saveFileDialog1.FileName = "favorites.mcfunction";
             saveFileDialog1.Filter = "mcfunction Files (*.mcfunction)|*.mcfunction|All Files (*.*)|*.*";
             saveFileDialog1.RestoreDirectory = true;
@@ -898,7 +978,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.InactiveBorder;
-            ClientSize = new System.Drawing.Size(751, 479);
+            ClientSize = new System.Drawing.Size(751, 495);
             Controls.Add(comboBox1);
             Controls.Add(pathPanel);
             Controls.Add(comPanel);
@@ -906,6 +986,7 @@
             Margin = new System.Windows.Forms.Padding(4);
             Name = "Form1";
             Text = "Playsounder";
+            FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)PitchBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)VolumeBar).EndInit();
@@ -914,6 +995,8 @@
             comBottomPanel1.PerformLayout();
             comBottomPanel2.ResumeLayout(false);
             comBottomPanel2.PerformLayout();
+            checkBoxPanel.ResumeLayout(false);
+            checkBoxPanel.PerformLayout();
             comPanel.ResumeLayout(false);
             comUpPanel.ResumeLayout(false);
             comParasPanel.ResumeLayout(false);
@@ -992,6 +1075,11 @@
         private System.Windows.Forms.Button comsList_moveUp;
         private System.Windows.Forms.Button comsList_moveDown;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.TableLayoutPanel checkBoxPanel;
+        private System.Windows.Forms.CheckBox playCheckboxSelected;
+        private System.Windows.Forms.CheckBox playCheckboxNotSelected;
+        private System.Windows.Forms.CheckBox playCheckboxParameter;
+        private System.Windows.Forms.Button comsList_rewrite;
     }
 }
 
